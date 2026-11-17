@@ -187,6 +187,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .molbg .o{fill:var(--red);stroke:none}
 .molbg .draw{stroke-dasharray:420;stroke-dashoffset:420;animation:draw 4s ease forwards}
 
+.bmode .bp{opacity:0}
+.bmode .bp.bing{opacity:1}
+.abox{position:fixed;z-index:39;pointer-events:none;border:1.5px solid;opacity:0;transition:opacity .35s}
+.abox span{position:absolute;left:-1.5px;top:-21px;color:#fff;font-family:var(--mono);font-size:.6rem;padding:3px 6px;border-radius:3px 3px 3px 0;white-space:nowrap}
 .rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
 .mask{display:block;overflow:hidden}
@@ -223,7 +227,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <a class="l keep" href="#top">Home</a><a class="l" href="#work">Work</a><a class="l" href="#experience">Experience</a><a class="l" href="#about">About</a><a class="l keep" href="#contact">Contact</a>
 </nav>
 <div id="cursors"></div>
-<div id="sel"><i></i><i></i><i></i><i></i><span>Frame</span><b>0 × 0</b></div>
 
 <main id="top">
 <!-- HERO -->
@@ -422,30 +425,72 @@ $('#more').innerHTML=more.map(m=>`<div class="mini rv"><span class="n">${m[0]}</
 $('#mods').innerHTML=mods.map(m=>`<div>${m[0]}<small>${m[1]}</small></div>`).join('');
 $('#certlist').innerHTML=certs.map(c=>`<div class="rv"><h4>${c[0]}<b>${String(c[1]).padStart(2,'0')}</b></h4><ul>${c[2].map(x=>`<li>${x[0]}<small>${x[1]}</small></li>`).join('')}</ul></div>`).join('');
 
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
-document.querySelectorAll('.rv,.big,.pulse').forEach(el=>io.observe(el));
-setTimeout(()=>document.querySelectorAll('.hero .rv,.hero .big').forEach(e=>e.classList.add('in')),150);
+const reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const buildMode=!reduceM&&matchMedia('(hover:hover) and (pointer:fine)').matches&&innerWidth>=900;
+if(!buildMode){
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+ document.querySelectorAll('.rv,.big,.pulse').forEach(el=>io.observe(el));
+ setTimeout(()=>document.querySelectorAll('.hero .rv,.hero .big').forEach(e=>e.classList.add('in')),150);
+}
 $('#copy').addEventListener('click',async e=>{try{await navigator.clipboard.writeText('aritrapaul30@gmail.com');e.target.textContent='Copied'}catch(_){e.target.textContent='aritrapaul30@gmail.com'}});
 const navA=[...document.querySelectorAll('nav a.l')];
 addEventListener('scroll',()=>{let cur='top';document.querySelectorAll('section[id]').forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.4)cur=s.id});navA.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur))},{passive:true});
 addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){$('.hero .word').style.transform=`translateX(-50%) translateY(${y*.25}px)`;$('.hero .me').style.translate=`0 ${y*.08}px`}},{passive:true});
 
-/* multiplayer cursors: pill-capsule name tags that wander and gather around whatever is being "edited" */
-(()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- const tags=[['Python','#3B82F6'],['SQL','#10B981'],['Power BI','#EAB308'],['Tableau','#EC4899'],['R','#8B5CF6'],['ETL','#06B6D4'],['GMP','#EF4444'],['DAX','#F97316']];
- const box=$('#cursors');const sel=$('#sel');
- const cs=tags.map(([n,c],i)=>{const d=document.createElement('div');d.className='cur';d.innerHTML=`<svg viewBox="0 0 16 16"><path d="M1 1 L14 7 L8 8.5 L6 14 Z" fill="${c}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="cap"><i style="background:${c}">${n}</i><em>℞</em></span>`;box.appendChild(d);
-  return{el:d,x:Math.random()*innerWidth,y:Math.random()*innerHeight,tx:0,ty:0,sp:.012+Math.random()*.02,t:0}});
- cs.forEach(c=>{c.tx=c.x;c.ty=c.y});
- const pick=c=>{c.tx=60+Math.random()*(innerWidth-160);c.ty=80+Math.random()*(innerHeight-140)};
- let target=null;
- function chooseSel(){const els=[...document.querySelectorAll('[data-sel]')].filter(e=>{const r=e.getBoundingClientRect();return r.top>70&&r.bottom<innerHeight-30&&r.width>0});
-  if(!els.length){sel.style.opacity=0;target=null;return}target=els[(Math.random()*els.length)|0];const r=target.getBoundingClientRect();
-  sel.style.left=r.left-6+'px';sel.style.top=r.top-6+'px';sel.style.width=r.width+12+'px';sel.style.height=r.height+12+'px';sel.style.opacity=1;
-  sel.querySelector('span').textContent=target.dataset.sel;sel.querySelector('b').textContent=`${Math.round(r.width)} × ${Math.round(r.height)}`;
-  cs.slice(0,3).forEach((c,i)=>{c.tx=r.left+r.width*(.2+.3*i)+(Math.random()-.5)*40;c.ty=r.top+r.height*(.3+Math.random()*.6)})}
- setInterval(chooseSel,2600);addEventListener('scroll',()=>{sel.style.opacity=0},{passive:true});
- (function loop(){cs.forEach((c,i)=>{c.t++;if(c.t%(160+i*23)===0&&(i>2||!target))pick(c);c.x+=(c.tx-c.x)*c.sp;c.y+=(c.ty-c.y)*c.sp;c.el.style.transform=`translate(${c.x}px,${c.y}px)`});requestAnimationFrame(loop)})();
+
+/* Live build: coloured agents assemble each section as it comes into view, then gather around your cursor */
+if(buildMode)(()=>{
+ document.body.classList.add('bmode');
+ const agents=[['Python','#3B82F6'],['SQL','#10B981'],['Power BI','#EAB308'],['Tableau','#EC4899'],['R','#8B5CF6'],['ETL','#06B6D4'],['GMP','#EF4444'],['DAX','#F97316']];
+ const layer=$('#cursors');
+ // pick the pieces of each section that get "built"
+ const groups=new Map();
+ const hero=$('.hero');
+ groups.set(hero,['.word','.me','.hi','.hero h1','.role','.left>p','.left .cta','.side','.scroll'].map(q=>$(q)).filter(Boolean));
+ document.querySelectorAll('main section:not(.hero)').forEach(sec=>{
+  const c=[...sec.querySelectorAll('.rv,.big,.molbg')];
+  groups.set(sec,c.filter(el=>!c.some(o=>o!==el&&o.contains(el))));
+ });
+ groups.forEach(list=>list.forEach(el=>{el.classList.remove('rv');el.classList.add('bp')}));
+ const queue=[];
+ const enqueue=sec=>{const g=groups.get(sec);if(g&&!sec.dataset.q){sec.dataset.q=1;queue.push(...g)}};
+ const sio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)enqueue(e.target)}),{threshold:.12});
+ groups.forEach((_,sec)=>sio.observe(sec));
+ let mx=innerWidth*.5,my=innerHeight*.62,moved=false;
+ addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;moved=true},{passive:true});
+ const ease=t=>1-Math.pow(1-t,3);
+ const reveal=el=>{el.classList.add('bing','in');el.style.clipPath='none'};
+ const A=agents.map(([n,c],i)=>{
+  const d=document.createElement('div');d.className='cur';
+  d.innerHTML=`<svg viewBox="0 0 16 16"><path d="M1 1 L14 7 L8 8.5 L6 14 Z" fill="${c}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="cap"><i style="background:${c}">${n}</i><em>℞</em></span>`;
+  layer.appendChild(d);
+  const b=document.createElement('div');b.className='abox';b.style.borderColor=c;b.innerHTML=`<span style="background:${c}"></span>`;document.body.appendChild(b);
+  const edge=i%4;const x=edge===0?-40:edge===1?innerWidth+40:Math.random()*innerWidth,y=edge===2?-40:edge===3?innerHeight+40:Math.random()*innerHeight;
+  return{n,el:d,box:b,x,y,vx:0,vy:0,state:'idle',task:null,t:0,hold:0,ang:i/agents.length*Math.PI*2}});
+ let last=performance.now(),spin=0,cool=0;
+ function step(now){const dt=Math.min(.05,(now-last)/1000);last=now;spin+=dt*1.1;cool-=dt;
+  A.forEach((a,i)=>{
+   if(a.state==='idle'||a.state==='orbit'){if(queue.length&&cool<=0){a.task=queue.shift();a.state='travel';cool=.32}else a.state='orbit'}
+   let tx,ty,stiff=.11;
+   if(a.state==='travel'){const r=a.task.getBoundingClientRect();
+    if(r.bottom<-50||r.top>innerHeight+50||r.width===0){reveal(a.task);a.state='idle';return}
+    a.task.classList.add('bing');a.task.style.clipPath='inset(0 100% 100% 0)';
+    tx=r.left;ty=r.top;if(Math.hypot(tx-a.x,ty-a.y)<6){a.state='drag';a.t=0}}
+   if(a.state==='drag'){const r=a.task.getBoundingClientRect();a.t=Math.min(1,a.t+dt/Math.min(1.3,.75+r.width*r.height/1200000));const e=ease(a.t);
+    if(a.task.classList.contains('big')||a.task.classList.contains('pulse'))a.task.classList.add('in');
+    a.task.style.clipPath=`inset(0 ${(1-e)*100}% ${(1-e)*100}% 0)`;
+    tx=r.left+r.width*e;ty=r.top+r.height*e;a.x=tx;a.y=ty;stiff=1;
+    Object.assign(a.box.style,{left:r.left-4+'px',top:r.top-4+'px',width:r.width*e+8+'px',height:r.height*e+8+'px',opacity:1});
+    a.box.firstChild.textContent=`${a.n} · ${Math.round(r.width*e)} × ${Math.round(r.height*e)}`;
+    if(a.t>=1){reveal(a.task);a.state='hold';a.hold=.28}}
+   if(a.state==='hold'){a.hold-=dt;tx=a.x;ty=a.y;const r=a.task.getBoundingClientRect();Object.assign(a.box.style,{left:r.left-4+'px',top:r.top-4+'px'});
+    if(a.hold<=0){a.box.style.opacity=0;a.task=null;a.state='idle'}}
+   if(a.state==='orbit'){const R=62+6*Math.sin(spin*1.7+i);const ang=a.ang+spin;tx=mx+Math.cos(ang)*R-4;ty=my+Math.sin(ang)*R-4;stiff=moved?.09:.05}
+   if(a.state!=='drag'){a.x+=(tx-a.x)*stiff;a.y+=(ty-a.y)*stiff}
+   a.el.style.transform=`translate(${a.x}px,${a.y}px)`;
+  });
+  requestAnimationFrame(step)}
+ enqueue(hero);requestAnimationFrame(step);
 })();
 </script>
 
