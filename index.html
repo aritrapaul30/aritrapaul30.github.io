@@ -131,7 +131,7 @@ nav a.l:hover,nav a.l.on{color:var(--ink);background:rgba(255,255,255,.06)}
 .quote p{font-family:var(--display);font-size:1.9rem;line-height:1;text-transform:uppercase;color:#1A0503}
 .quote small{display:block;margin-top:20px;font-family:var(--mono);font-size:.7rem;color:#3D0906}
 #mol{width:100%;height:340px;display:block;margin-top:30px}
-.molcap{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;text-align:center;margin-top:-6px}
+.molcap{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;text-align:center;margin-top:-6px;margin-bottom:56px}
 
 /* education */
 .edu{display:grid;grid-template-columns:1.2fr .8fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:50px}
@@ -557,10 +557,10 @@ addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){$('.hero .word'
 
 
 
-/* Auto-scroll: a steady glide down the page that stops as soon as the visitor scrolls themselves */
+/* Auto-scroll: glides down the page, easing its speed to match how much the agents still have to build. Stops as soon as the visitor scrolls themselves. */
 (()=>{const btn=$('#autoscroll');
  if(matchMedia('(prefers-reduced-motion: reduce)').matches){btn.remove();return}
- let on=true,acc=0,last=performance.now(),started=false,ownScroll=false;
+ let on=true,acc=0,last=performance.now(),started=false,speed=0;
  const set=v=>{on=v;btn.classList.toggle('off',!v);btn.querySelector('span').textContent=v?'Auto-scroll on':'Auto-scroll off'};
  btn.addEventListener('click',()=>set(!on));
  const stop=()=>{if(on)set(false)};
@@ -570,64 +570,76 @@ addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){$('.hero .word'
  setTimeout(()=>started=true,2500);
  (function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;
   const max=document.documentElement.scrollHeight-innerHeight;
-  if(on&&started){acc+=dt*75;const px=Math.floor(acc);if(px>=1){acc-=px;window.scrollTo({top:Math.min(max,scrollY+px),behavior:'instant'})}
+  const bl=window.__backlog||0;const target=bl>7?10:85/(1+bl*.32);speed+=(target-speed)*Math.min(1,dt*2.5);
+  if(on&&started){acc+=dt*speed;const px=Math.floor(acc);if(px>=1){acc-=px;window.scrollTo({top:Math.min(max,scrollY+px),behavior:'instant'})}
    if(scrollY>=max-1)set(false)}
   requestAnimationFrame(tick)})(last);
 })();
-/* Live build: coloured agents assemble each section as it comes into view, then gather around your cursor */
+/* Live build: coloured agents assemble the page piece by piece as it scrolls into view. Only when every piece is built do they gather around your cursor. */
 if(buildMode)(()=>{
  document.body.classList.add('bmode');
  const agents=[['Python','#3B82F6','python'],['SQL','#10B981','sql'],['Power BI','#EAB308','powerbi'],['Tableau','#EC4899','tableau'],['R','#8B5CF6','r'],['ETL','#06B6D4','etl'],['GMP','#EF4444','gmp'],['DAX','#F97316','dax']];
  const layer=$('#cursors');
- // pick the pieces of each section that get "built"
- const groups=new Map();
- const hero=$('.hero');
- groups.set(hero,['.word','.me','.hi','.hero h1','.role','.left>p','.left .cta','.side','.scroll'].map(q=>$(q)).filter(Boolean));
+ // every piece that gets built, in page order
+ const heroItems=['.word','.me','.hi','.hero h1','.role','.left>p','.left .cta','.side','.scroll'].map(q=>$(q)).filter(Boolean);
+ let items=[...heroItems];
  document.querySelectorAll('main section:not(.hero)').forEach(sec=>{
   const c=[...sec.querySelectorAll('.rv,.big,.molbg')];
-  groups.set(sec,c.filter(el=>!c.some(o=>o!==el&&o.contains(el))));
+  c.filter(el=>!c.some(o=>o!==el&&o.contains(el))).forEach(el=>{
+   items.push(el);
+   // larger cards are built in stages: frame first, then their contents
+   if(el.matches('.proj,.tile,.row,.mini,.edu>div,.certs>div'))[...el.children].forEach(ch=>{if(ch.offsetHeight>8)items.push(ch)});
+  });
  });
- groups.forEach(list=>list.forEach(el=>{el.classList.remove('rv');el.classList.add('bp')}));
- const queue=[];
- const enqueue=sec=>{const g=groups.get(sec);if(g&&!sec.dataset.q){sec.dataset.q=1;queue.push(...g)}};
- const sio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)enqueue(e.target)}),{threshold:.12});
- groups.forEach((_,sec)=>sio.observe(sec));
+ items.forEach(el=>{el.classList.remove('rv');el.classList.add('bp')});
+ const total=items.length;let built=0;
+ const order=(a,b)=>a.compareDocumentPosition(b)&Node.DOCUMENT_POSITION_FOLLOWING?-1:1;
+ const queue=[];const queued=new Set();
+ const push=el=>{if(queued.has(el))return;queued.add(el);queue.push(el);queue.sort(order)};
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){push(e.target);io.unobserve(e.target)}}),{rootMargin:'0px 0px -14% 0px'});
+ items.forEach(el=>io.observe(el));
  let mx=innerWidth*.5,my=innerHeight*.62,moved=false;
  addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;moved=true},{passive:true});
  const ease=t=>1-Math.pow(1-t,3);
- const reveal=el=>{el.classList.add('bing','in');el.style.clipPath='none'};
+ const reveal=el=>{if(el.dataset.done)return;el.dataset.done=1;built++;el.classList.add('bing','in');el.style.clipPath='none'};
  const A=agents.map(([n,c,lk],i)=>{
   const d=document.createElement('div');d.className='cur';
   d.innerHTML=`<svg viewBox="0 0 16 16"><path d="M1 1 L14 7 L8 8.5 L6 14 Z" fill="${c}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="cap"><i style="background:${c}">${n}</i><em>${LOGO[lk]}</em></span>`;
   layer.appendChild(d);
   const b=document.createElement('div');b.className='abox';b.style.borderColor=c;b.innerHTML=`<span style="background:${c}"></span>`;document.body.appendChild(b);
   const edge=i%4;const x=edge===0?-40:edge===1?innerWidth+40:Math.random()*innerWidth,y=edge===2?-40:edge===3?innerHeight+40:Math.random()*innerHeight;
-  return{n,el:d,box:b,x,y,vx:0,vy:0,state:'idle',task:null,t:0,hold:0,ang:i/agents.length*Math.PI*2}});
+  return{n,el:d,box:b,x,y,state:'idle',task:null,t:0,hold:0,ang:i/agents.length*Math.PI*2}});
  let last=performance.now(),spin=0,cool=0;
  function step(now){const dt=Math.min(.05,(now-last)/1000);last=now;spin+=dt*1.1;cool-=dt;
+  const done=built>=total;
   A.forEach((a,i)=>{
-   if(a.state==='idle'||a.state==='orbit'){if(queue.length&&cool<=0){a.task=queue.shift();a.state='travel';cool=.32}else a.state='orbit'}
-   let tx,ty,stiff=.11;
+   if(a.state==='idle'||a.state==='wait'||a.state==='orbit'){
+    if(queue.length&&cool<=0){a.task=queue.shift();a.state='travel';cool=.18}
+    else a.state=done?'orbit':'wait'}
+   let tx,ty,stiff=.12;
    if(a.state==='travel'){const r=a.task.getBoundingClientRect();
-    if(r.bottom<-50||r.top>innerHeight+50||r.width===0){reveal(a.task);a.state='idle';return}
-    a.task.classList.add('bing');a.task.style.clipPath='inset(0 100% 100% 0)';
-    tx=r.left;ty=r.top;if(Math.hypot(tx-a.x,ty-a.y)<6){a.state='drag';a.t=0}}
-   if(a.state==='drag'){const r=a.task.getBoundingClientRect();a.t=Math.min(1,a.t+dt/Math.min(1.3,.75+r.width*r.height/1200000));const e=ease(a.t);
+    if(r.bottom<0||r.top>innerHeight||r.width===0){window.__fb=(window.__fb||0)+1;reveal(a.task);a.state='idle';return}
+    a.task.classList.add('bing');if(!a.task.dataset.done)a.task.style.clipPath='inset(0 100% 100% 0)';
+    tx=r.left;ty=Math.max(r.top,8);if(Math.hypot(tx-a.x,ty-a.y)<8){a.state='drag';a.t=0}}
+   if(a.state==='drag'){const r=a.task.getBoundingClientRect();a.t=Math.min(1,a.t+dt/Math.min(.95,.5+r.width*r.height/1500000));const e=ease(a.t);
     if(a.task.classList.contains('big')||a.task.classList.contains('pulse'))a.task.classList.add('in');
     a.task.style.clipPath=`inset(0 ${(1-e)*100}% ${(1-e)*100}% 0)`;
-    tx=r.left+r.width*e;ty=r.top+r.height*e;a.x=tx;a.y=ty;stiff=1;
+    tx=r.left+r.width*e;ty=Math.min(innerHeight-20,r.top+r.height*e);a.x=tx;a.y=ty;
     Object.assign(a.box.style,{left:r.left-4+'px',top:r.top-4+'px',width:r.width*e+8+'px',height:r.height*e+8+'px',opacity:1});
     a.box.firstChild.textContent=`${a.n} · ${Math.round(r.width*e)} × ${Math.round(r.height*e)}`;
-    if(a.t>=1){reveal(a.task);a.state='hold';a.hold=.28}}
+    if(a.t>=1){reveal(a.task);a.state='hold';a.hold=.22}}
    if(a.state==='hold'){a.hold-=dt;tx=a.x;ty=a.y;const r=a.task.getBoundingClientRect();Object.assign(a.box.style,{left:r.left-4+'px',top:r.top-4+'px'});
     if(a.hold<=0){a.box.style.opacity=0;a.task=null;a.state='idle'}}
+   if(a.state==='wait'){ // stand by at the bottom edge, where the next pieces will appear
+    tx=innerWidth*(.12+.76*i/(A.length-1))+Math.sin(spin*1.3+i)*14;ty=innerHeight-70+Math.cos(spin*1.6+i*2)*10;stiff=.06}
    if(a.state==='orbit'){const R=62+6*Math.sin(spin*1.7+i);const ang=a.ang+spin;tx=mx+Math.cos(ang)*R-4;ty=my+Math.sin(ang)*R-4;stiff=moved?.09:.05}
    if(a.state!=='drag'){a.x+=(tx-a.x)*stiff;a.y+=(ty-a.y)*stiff}
    a.el.style.transform=`translate(${a.x}px,${a.y}px)`;
   });
-  window.__building=queue.length>0||A.some(a=>a.state==='travel'||a.state==='drag'||a.state==='hold');
+  window.__backlog=queue.length+A.filter(a=>a.state==='travel'||a.state==='drag').length;
+  window.__buildDone=done;
   requestAnimationFrame(step)}
- window.__building=true;enqueue(hero);requestAnimationFrame(step);
+ window.__backlog=heroItems.length;requestAnimationFrame(step);
 })();
 </script>
 
