@@ -109,14 +109,15 @@ nav a.l:hover,nav a.l.on{color:var(--ink);background:rgba(255,255,255,.06)}
 .row .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .row .chips span{font-family:var(--mono);font-size:.62rem;padding:4px 8px;border:1px solid var(--line);border-radius:3px;color:#BDBDBD}
 .row .yr{font-family:var(--display);font-size:2.2rem;color:var(--red);line-height:1;text-align:right}
-.row .yr small{display:block;font-family:var(--mono);font-size:.6rem;color:var(--muted);letter-spacing:.1em}
+.row .yr small{display:block;font-family:var(--mono);font-size:.76rem;color:#E4E4E4;letter-spacing:.08em;margin-top:8px}
+.row .yr em{display:inline-block;margin-top:8px;font-style:normal;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(229,50,42,.16);border:1px solid rgba(229,50,42,.55);padding:4px 9px;border-radius:3px}
 
 /* about */
 .about h2{font-size:clamp(3.4rem,8vw,7rem);margin:12px 0 30px}
 .about .cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:60px}
 .about .cols p{color:#BDBDBD;font-size:.95rem}
 .about .cols p b{color:var(--ink);font-weight:600}
-.grid3{display:grid;grid-template-columns:1.1fr 1fr .8fr;gap:40px;align-items:start}
+.grid3{display:grid;grid-template-columns:1.3fr .7fr;gap:60px;align-items:start}
 .table h5,.how h5{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;color:var(--muted);font-weight:400;text-transform:uppercase;margin-bottom:14px}
 .table .r{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.86rem}
 .table .r span:first-child{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;padding-top:3px}
@@ -168,6 +169,64 @@ nav a.l:hover,nav a.l.on{color:var(--ink);background:rgba(255,255,255,.06)}
 footer{border-top:1px solid var(--line);padding:22px 0;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
+
+/* skills bento */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-flow:dense;gap:14px}
+.tile{background:#101010;border:1px solid var(--line);border-radius:8px;padding:24px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.tile:hover{border-color:rgba(229,50,42,.6);transform:translateY(-3px)}
+.tile::after{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--x,50%) var(--y,0%),rgba(229,50,42,.10),transparent 45%);opacity:0;transition:.3s;pointer-events:none}
+.tile:hover::after{opacity:1}
+.tile .tl{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.tile h4{font-family:var(--display);font-weight:400;font-size:1.7rem;text-transform:uppercase;line-height:1;margin:8px 0 18px}
+.t-lang{grid-column:span 2;grid-row:span 2}.t-bi{grid-column:span 2}.t-ml{grid-column:span 2}.t-stats{grid-column:span 2}.t-tools{grid-column:span 2}
+.langs{display:grid;gap:12px}
+.lang{display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:center;padding:16px;border:1px solid var(--line);border-radius:8px;background:#0C0C0C}
+.lang .lg{width:48px;height:48px}
+.lang b{font-family:var(--display);font-weight:400;font-size:1.6rem;line-height:1;display:block}
+.lang small{font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:.08em}
+.lang .bar{height:6px;border-radius:4px;background:rgba(255,255,255,.07);margin-top:10px;overflow:hidden}
+.lang .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--deep),var(--red));transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.in .lang .bar i,.bing .lang .bar i{width:var(--w)}
+.lang .cnt{font-family:var(--display);font-size:2.4rem;color:var(--red);line-height:1;text-align:right}
+.lang .cnt small{display:block;font-size:.58rem}
+.bigl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.bigl>div{border:1px solid var(--line);border-radius:8px;padding:14px;background:#0C0C0C;display:flex;flex-direction:column;gap:6px}
+.bigl .lg{width:34px;height:34px}
+.bigl b{font-weight:600;font-size:.95rem}
+.bigl small{font-family:var(--mono);font-size:.6rem;color:var(--muted)}
+.chips2{display:flex;flex-wrap:wrap;gap:6px}
+.chips2 span{font-family:var(--mono);font-size:.66rem;padding:5px 9px;border:1px solid var(--line);border-radius:4px;color:#CFCFCF;transition:.2s}
+.chips2 span:hover{border-color:var(--red);color:#fff}
+.mlgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mlgrid div{border:1px solid var(--line);border-radius:6px;padding:12px;background:#0C0C0C;transition:.25s}
+.mlgrid div:hover{background:var(--red);border-color:var(--red)}
+.mlgrid b{font-family:var(--display);font-weight:400;font-size:1.5rem;display:block;line-height:1}
+.mlgrid span{font-size:.72rem;color:#BDBDBD}
+.mlgrid div:hover span{color:#fff}
+.pipe{position:relative;display:flex;justify-content:space-between;margin:4px 0 18px;padding:0 4px}
+.pipe::before{content:"";position:absolute;left:24px;right:24px;top:20px;height:2px;background:rgba(255,255,255,.1)}
+.pipe div{position:relative;z-index:1;text-align:center}
+.pipe i{font-style:normal;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#0C0C0C;border:1.5px solid var(--red);font-family:var(--display);font-size:1.1rem;margin:0 auto 6px}
+.pipe span{font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.08em}
+.pipe em{position:absolute;top:17px;left:24px;width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:flow 2.4s linear infinite}
+.pipe em:nth-of-type(2){animation-delay:.8s}.pipe em:nth-of-type(3){animation-delay:1.6s}
+@keyframes flow{from{left:24px;opacity:0}10%{opacity:1}90%{opacity:1}to{left:calc(100% - 32px);opacity:0}}
+.stat{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+.stat b{font-family:var(--display);font-weight:400;font-size:2.8rem;color:var(--red);line-height:1}
+.stat span{font-size:.78rem;color:#BDBDBD;line-height:1.4}
+.toolrow{display:flex;flex-wrap:wrap;gap:8px}
+.toolrow span{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:#0C0C0C;font-size:.82rem;font-weight:500;transition:.2s}
+.toolrow span:hover{border-color:var(--red)}
+.toolrow .lg{width:18px;height:18px;display:inline-block}
+.spk{display:grid;gap:8px}
+.spk div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)}
+.spk b{font-weight:600;font-size:.92rem}
+.spk span{font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding-top:3px}
+.lg{display:inline-block}.lg svg{width:100%;height:100%;display:block}
+.cur .cap em svg{width:15px;height:15px;display:block}
+.cur .cap em{display:grid;place-items:center;padding:3px 8px 3px 6px!important}
+@media (max-width:1000px){.bento{grid-template-columns:1fr 1fr}.t-lang,.t-bi,.t-ml,.t-stats,.t-tools{grid-column:span 2}.t-lang{grid-row:auto}}
+@media (max-width:600px){.bento{grid-template-columns:1fr}.t-lang,.t-bi,.t-ml,.t-stats,.t-tools{grid-column:auto}.mlgrid{grid-template-columns:1fr 1fr}.bigl{grid-template-columns:1fr}}
 /* multiplayer cursors + selection box */
 #cursors{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
 .cur{position:absolute;left:0;top:0;will-change:transform;display:flex;align-items:flex-start;gap:2px}
@@ -227,7 +286,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 <body>
 <nav>
   <span class="mk">AP</span>
-  <a class="l keep" href="#top">Home</a><a class="l" href="#work">Work</a><a class="l" href="#experience">Experience</a><a class="l" href="#about">About</a><a class="l keep" href="#contact">Contact</a>
+  <a class="l keep" href="#top">Home</a><a class="l" href="#work">Work</a><a class="l" href="#experience">Experience</a><a class="l" href="#skills">Skills</a><a class="l" href="#about">About</a><a class="l keep" href="#contact">Contact</a>
 </nav>
 <div id="cursors"></div>
 <button id="autoscroll" type="button"><i></i><span>Auto-scroll on</span></button>
@@ -315,10 +374,54 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
         <div class="cap rv">of hands-on data work before my master's</div>
       </div>
       <div class="rows">
-        <div class="row rv" data-sel="Row / Sunway"><div><h4>Master of Business Analytics</h4><div class="co">Sunway University · Malaysia</div><p>CGPA 3.94/4.0 on the Sunway Taught Master Scholarship. Perfect 4.00 GPA across the final three semesters.</p></div><div class="yr">2026<small>SEP 25 – AUG 26</small></div></div>
-        <div class="row rv" data-sel="Row / Digital Den"><div><h4>Data & Inventory Analyst</h4><div class="co">Digital Den · Remote, part-time</div><p>Built an Excel data warehouse from scratch and Pivot dashboards that gave the business its first single source of truth for sales, enabling data-driven restocking.</p><div class="chips"><span>Data warehousing</span><span>Power Query</span><span>Dashboards</span></div></div><div class="yr">2025<small>AUG 20 – AUG 25</small></div></div>
-        <div class="row rv" data-sel="Row / Cradel"><div><h4>Junior Executive, Quality Assurance</h4><div class="co">Cradel Pharmaceuticals · Kolkata</div><p>Managed quality data across 3 manufacturing lines with 100% GMP documentation accuracy. Root-cause analysis on batch deviations and reports for multinational client auditors.</p><div class="chips"><span>P&G Health</span><span>Wallace</span><span>Strassenburg</span><span>CAPA</span><span>BMR/BPR</span></div></div><div class="yr">2025<small>SEP 23 – APR 25</small></div></div>
-        <div class="row rv"><div><h4>Bachelor of Pharmacy</h4><div class="co">The Neotia University · India</div><p>CGPA 9.46/10, First Class with Distinction. Registered Pharmacist with the Pharmacy Council of India.</p></div><div class="yr">2023<small>JUL 19 – JUN 23</small></div></div>
+        <div class="row rv" data-sel="Row / Sunway"><div><h4>Master of Business Analytics</h4><div class="co">Sunway University · Malaysia</div><p>CGPA 3.94/4.0 on the Sunway Taught Master Scholarship. Perfect 4.00 GPA across the final three semesters.</p></div><div class="yr">2026<small>SEP 25 – AUG 26</small><em>1 yr</em></div></div>
+        <div class="row rv" data-sel="Row / Digital Den"><div><h4>Data & Inventory Analyst</h4><div class="co">Digital Den · Remote, part-time</div><p>Built an Excel data warehouse from scratch and Pivot dashboards that gave the business its first single source of truth for sales, enabling data-driven restocking.</p><div class="chips"><span>Data warehousing</span><span>Power Query</span><span>Dashboards</span></div></div><div class="yr">2025<small>AUG 20 – AUG 25</small><em>5 yrs 1 mo</em></div></div>
+        <div class="row rv" data-sel="Row / Cradel"><div><h4>Junior Executive, Quality Assurance</h4><div class="co">Cradel Pharmaceuticals · Kolkata</div><p>Managed quality data across 3 manufacturing lines with 100% GMP documentation accuracy. Root-cause analysis on batch deviations and reports for multinational client auditors.</p><div class="chips"><span>P&G Health</span><span>Wallace</span><span>Strassenburg</span><span>CAPA</span><span>BMR/BPR</span></div></div><div class="yr">2025<small>SEP 23 – APR 25</small><em>1 yr 8 mos</em></div></div>
+        <div class="row rv"><div><h4>Bachelor of Pharmacy</h4><div class="co">The Neotia University · India</div><p>CGPA 9.46/10, First Class with Distinction. Registered Pharmacist with the Pharmacy Council of India.</p></div><div class="yr">2023<small>JUL 19 – JUN 23</small><em>4 yrs</em></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sechead">
+      <div><span class="lbl rv">Skills & tools</span><h2 class="big"><span class="mask"><span>The</span></span><span class="mask"><span class="r">toolkit<span style="color:var(--ink)">.</span></span></span></h2></div>
+      <p class="rv">What I reach for day to day, and how often each one shows up across my 12 projects.</p>
+    </div>
+    <div class="bento">
+      <div class="tile t-lang rv"><span class="tl">Programming</span><h4>Languages</h4>
+        <div class="langs" id="langs"></div>
+        <div class="tl" style="display:block;margin:22px 0 10px;color:var(--muted)">Where I write it</div><div class="chips2"><span>Jupyter</span><span>Google Colab</span><span>RStudio</span><span>Pandas</span><span>scikit-learn</span></div>
+      </div>
+      <div class="tile t-bi rv"><span class="tl">BI & visualisation</span><h4>Dashboards people open</h4>
+        <div class="bigl"><div><span class="lg" data-logo="powerbi"></span><b>Power BI</b><small>DAX · data modelling</small></div><div><span class="lg" data-logo="tableau"></span><b>Tableau</b><small>KPI · Top-N · storytelling</small></div><div><span class="lg" data-logo="excel"></span><b>Excel</b><small>Power Query · pivots</small></div></div>
+        <div class="chips2"><span>Plotly</span><span>ggplot2</span><span>Executive scorecards</span><span>Galaxy schema</span></div>
+      </div>
+      <div class="tile t-ml rv"><span class="tl">Machine learning</span><h4>Models, tested properly</h4>
+        <div class="mlgrid"><div><b>RF</b><span>Random Forest</span></div><div><b>GB</b><span>Gradient Boosting</span></div><div><b>XG</b><span>XGBoost</span></div><div><b>DT</b><span>Decision Trees</span></div><div><b>LR</b><span>Regression</span></div><div><b>KM</b><span>K-Means</span></div><div><b>CV</b><span>Cross-validation</span></div><div><b>HP</b><span>Tuning</span></div></div>
+      </div>
+      <div class="tile t-de rv"><span class="tl">Data engineering</span><h4>Pipelines</h4>
+        <div class="pipe"><div><i>E</i><span>Extract</span></div><div><i>T</i><span>Transform</span></div><div><i>L</i><span>Load</span></div><em></em><em></em><em></em></div>
+        <div class="chips2"><span>Data warehousing</span><span>Star & galaxy schemas</span><span>Window functions</span><span>CTEs</span><span>Stored procedures</span></div>
+      </div>
+      <div class="tile t-nlp rv"><span class="tl">NLP</span><h4>Text analytics</h4>
+        <div class="stat"><b>90.7%</b><span>best accuracy, DistilBERT on Malay-English reviews</span></div>
+        <div class="chips2"><span>DistilBERT</span><span>VADER</span><span>LDA</span><span>Naive Bayes</span></div>
+      </div>
+      <div class="tile t-pharma rv"><span class="tl">Domain</span><h4>Pharma & quality</h4>
+        <div class="stat"><span class="lg" data-logo="gmp" style="width:40px;height:40px"></span><span>Registered Pharmacist, 1 yr 8 mos in GMP quality assurance</span></div>
+        <div class="chips2"><span>GMP / QMS</span><span>CAPA</span><span>BMR / BPR</span><span>Deviations</span></div>
+      </div>
+      <div class="tile t-stats rv"><span class="tl">Statistics</span><h4>Rigour</h4>
+        <div class="chips2"><span>Hypothesis testing</span><span>Paired t-tests</span><span>Point-biserial</span><span>EDA</span><span>Feature engineering</span><span>Regression diagnostics</span></div>
+      </div>
+      <div class="tile t-tools rv"><span class="tl">Tools & AI</span><h4>Everyday kit</h4>
+        <div class="toolrow"><span><i class="lg" data-logo="github"></i>GitHub</span><span><i class="lg" data-logo="gradio"></i>Gradio</span><span><i class="lg" data-logo="knime"></i>KNIME</span><span><i class="lg" data-logo="weka"></i>WEKA</span><span><i class="lg" data-logo="apify"></i>Apify</span><span><i class="lg" data-logo="gemini"></i>Gemini</span><span><i class="lg" data-logo="claude"></i>Claude</span></div>
+      </div>
+      <div class="tile t-spoken rv"><span class="tl">Languages spoken</span><h4>Communication</h4>
+        <div class="spk"><div><b>English</b><span>Professional</span></div><div><b>Bengali</b><span>Native</span></div><div><b>Hindi</b><span>Fluent</span></div></div>
       </div>
     </div>
   </div>
@@ -334,17 +437,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       <p class="rv">Most days that means <b>Python, SQL and Power BI</b>: cleaning data until it can be trusted, building models that are tested properly, and dashboards people actually open. I bring the habit QA taught me: <b>every number has to be right the first time</b>.</p>
     </div>
     <div class="grid3">
-      <div class="table rv">
-        <h5>Skills & tools</h5>
-        <div class="r"><span>Languages</span><span>Python, R, SQL (MySQL)</span></div>
-        <div class="r"><span>Engineering</span><span>ETL/ELT, data warehousing, star & galaxy schemas, window functions, CTEs, stored procedures</span></div>
-        <div class="r"><span>ML</span><span>Random Forest, Gradient Boosting, XGBoost, regression, K-Means, cross-validation, tuning</span></div>
-        <div class="r"><span>BI</span><span>Power BI (DAX), Tableau, Plotly, ggplot2, Excel & Power Query</span></div>
-        <div class="r"><span>NLP</span><span>DistilBERT, VADER, LDA, Naive Bayes</span></div>
-        <div class="r"><span>Tools</span><span>Gradio, KNIME, WEKA, Apify, GitHub, Gemini, Claude</span></div>
-        <div class="r"><span>Domain</span><span>GMP / QMS compliance, pharmaceutical operations, stakeholder reporting</span></div>
-        <div class="r"><span>Languages</span><span>English, Bengali, Hindi</span></div>
-      </div>
       <div class="how rv">
         <h5>How I work</h5>
         <ol>
@@ -429,6 +521,28 @@ $('#more').innerHTML=more.map(m=>`<div class="mini rv"><span class="n">${m[0]}</
 $('#mods').innerHTML=mods.map(m=>`<div>${m[0]}<small>${m[1]}</small></div>`).join('');
 $('#certlist').innerHTML=certs.map(c=>`<div class="rv"><h4>${c[0]}<b>${String(c[1]).padStart(2,'0')}</b></h4><ul>${c[2].map(x=>`<li>${x[0]}<small>${x[1]}</small></li>`).join('')}</ul></div>`).join('');
 
+const LOGO={
+ python:'<svg viewBox="0 0 24 24"><path fill="#3776AB" d="M11.9 2C7 2 7.3 4.1 7.3 4.1v2.2h4.7v.7H5.4S2 6.6 2 11.9s2.9 5.1 2.9 5.1h1.8v-2.5s-.1-2.9 2.9-2.9h4.9s2.8 0 2.8-2.7V4.8S17.8 2 11.9 2zM9.3 3.5a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8z"/><path fill="#FFD43B" d="M12.1 22c4.9 0 4.6-2.1 4.6-2.1v-2.2H12v-.7h6.6s3.4.4 3.4-4.9-2.9-5.1-2.9-5.1h-1.8v2.5s.1 2.9-2.9 2.9H9.5s-2.8 0-2.8 2.7v4.1S6.2 22 12.1 22zm2.6-1.5a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8z"/></svg>',
+ sql:'<svg viewBox="0 0 24 24"><path d="M4.5 5.5v13c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-13" fill="#00758F"/><ellipse cx="12" cy="5.5" rx="7.5" ry="3" fill="#2DA5C4"/><path d="M4.5 10.5c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3M4.5 15c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3" fill="none" stroke="#9FE3F2" stroke-width="1.1"/></svg>',
+ powerbi:'<svg viewBox="0 0 24 24"><rect x="14.5" y="2.5" width="6" height="19" rx="1.6" fill="#F2C811"/><rect x="9" y="7.5" width="6" height="14" rx="1.6" fill="#DDA90A"/><rect x="3.5" y="12.5" width="6" height="9" rx="1.6" fill="#B8860B"/></svg>',
+ tableau:'<svg viewBox="0 0 24 24"><g stroke-linecap="square"><path d="M12 7.5v9M7.5 12h9" stroke="#E8762D" stroke-width="2.2"/><path d="M12 1.8v4M10 3.8h4" stroke="#C72037" stroke-width="1.5"/><path d="M12 18.2v4M10 20.2h4" stroke="#5B879B" stroke-width="1.5"/><path d="M1.8 12h4M3.8 10v4" stroke="#1F457E" stroke-width="1.5"/><path d="M18.2 12h4M20.2 10v4" stroke="#EB912B" stroke-width="1.5"/><path d="M5.5 4v3M4 5.5h3M18.5 4v3M17 5.5h3M5.5 17v3M4 18.5h3M18.5 17v3M17 18.5h3" stroke="#7099A6" stroke-width="1.1"/></g></svg>',
+ r:'<svg viewBox="0 0 24 24"><ellipse cx="11" cy="10.5" rx="9.6" ry="6.6" fill="none" stroke="#A8ADB8" stroke-width="2.4"/><path fill="#2165B6" d="M8.6 7h6.6c2.3 0 3.5 1.3 3.5 3 0 1.5-.9 2.5-2.3 2.8l3 5.2h-3.3l-2.6-4.8h-2v4.8H8.6zm2.9 2.2v2.8h3c.9 0 1.5-.6 1.5-1.4s-.6-1.4-1.5-1.4z"/></svg>',
+ etl:'<svg viewBox="0 0 24 24"><path d="M6 12h3.5M14.5 12H18" stroke="#22D3EE" stroke-width="2"/><path d="M8.5 9.8L10.6 12l-2.1 2.2M16.8 9.8L18.9 12l-2.1 2.2" fill="none" stroke="#22D3EE" stroke-width="1.6"/><rect x="1.5" y="8.5" width="5" height="7" rx="1.2" fill="#0891B2"/><rect x="10.5" y="8.5" width="4" height="7" rx="1.2" fill="#06B6D4"/><ellipse cx="20" cy="9" rx="2.6" ry="1.2" fill="#67E8F9"/><path d="M17.4 9v6c0 .7 1.2 1.2 2.6 1.2s2.6-.5 2.6-1.2V9" fill="#0E7490"/></svg>',
+ gmp:'<svg viewBox="0 0 24 24"><g transform="rotate(-40 12 12)"><rect x="2.5" y="8" width="19" height="8" rx="4" fill="#F4F4F2"/><path d="M12 8h5.5a4 4 0 0 1 0 8H12z" fill="#E5322A"/><rect x="2.5" y="8" width="19" height="8" rx="4" fill="none" stroke="#9a9a9a" stroke-width=".6"/></g></svg>',
+ dax:'<svg viewBox="0 0 24 24"><rect x="2" y="3.5" width="20" height="17" rx="3.5" fill="#F2C811"/><text x="12" y="16.3" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="10.5" fill="#1a1a1a">fx</text></svg>',
+ excel:'<svg viewBox="0 0 24 24"><rect x="7" y="3" width="15" height="18" rx="2" fill="#21A366"/><path d="M14.5 3H20a2 2 0 0 1 2 2v4h-7.5zM14.5 9H22v6h-7.5zM14.5 15H22v4a2 2 0 0 1-2 2h-5.5z" fill="#33C481" opacity=".6"/><rect x="2" y="6.5" width="11" height="11" rx="1.6" fill="#107C41"/><path d="M4.7 9.2h2.1l1 1.8 1-1.8h2l-2 3 2.1 3.1h-2.1l-1-1.9-1.1 1.9H4.6l2.1-3.1z" fill="#fff"/></svg>',
+ github:'<svg viewBox="0 0 24 24"><path fill="#F4F4F2" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>',
+ gradio:'<svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z" fill="#FF7C00"/><path d="M3 12l9 5 9-5" fill="none" stroke="#FFA54C" stroke-width="2"/><path d="M3 16l9 5 9-5" fill="none" stroke="#FFC48A" stroke-width="2"/></svg>',
+ knime:'<svg viewBox="0 0 24 24"><path d="M12 3l9.5 17h-19z" fill="none" stroke="#FDD800" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="14" r="2.4" fill="#FDD800"/></svg>',
+ weka:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#4F5B93"/><path d="M6 8l2.2 8L12 10l3.8 6L18 8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+ apify:'<svg viewBox="0 0 24 24"><path d="M4 18L9 4h3L7 18z" fill="#97D700"/><path d="M10 18l5-14h3l-5 14z" fill="#71C5E8"/><path d="M16 18l2-6h3l-2 6z" fill="#FF9013"/></svg>',
+ gemini:'<svg viewBox="0 0 24 24"><path d="M12 2c.6 5.2 4.8 9.4 10 10-5.2.6-9.4 4.8-10 10-.6-5.2-4.8-9.4-10-10 5.2-.6 9.4-4.8 10-10z" fill="#4796E3"/></svg>',
+ claude:'<svg viewBox="0 0 24 24"><g stroke="#D97757" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></g></svg>'
+};
+document.querySelectorAll('[data-logo]').forEach(e=>e.innerHTML=LOGO[e.dataset.logo]||'');
+const usage=[['python','Python',7,'Pandas · scikit-learn'],['r','R',2,'ggplot2 · regression'],['sql','SQL',1,'MySQL · CTEs · procedures']];
+$('#langs').innerHTML=usage.map(([k,n,c,sub])=>`<div class="lang"><span class="lg">${LOGO[k]}</span><div><b>${n}</b><small>${sub}</small><div class="bar"><i style="--w:${c/12*100}%"></i></div></div><div class="cnt">${c}<small>of 12 projects</small></div></div>`).join('');
+document.querySelectorAll('.tile').forEach(t=>t.addEventListener('pointermove',e=>{const r=t.getBoundingClientRect();t.style.setProperty('--x',e.clientX-r.left+'px');t.style.setProperty('--y',e.clientY-r.top+'px')}));
 const reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const buildMode=!reduceM&&matchMedia('(hover:hover) and (pointer:fine)').matches&&innerWidth>=760;
 if(!buildMode){
@@ -443,7 +557,7 @@ addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){$('.hero .word'
 
 
 
-/* Slow auto-scroll: starts once the hero is built, waits while a section is being built, stops for good as soon as the visitor scrolls themselves */
+/* Auto-scroll: a steady glide down the page that stops as soon as the visitor scrolls themselves */
 (()=>{const btn=$('#autoscroll');
  if(matchMedia('(prefers-reduced-motion: reduce)').matches){btn.remove();return}
  let on=true,acc=0,last=performance.now(),started=false,ownScroll=false;
@@ -456,14 +570,14 @@ addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){$('.hero .word'
  setTimeout(()=>started=true,2500);
  (function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;
   const max=document.documentElement.scrollHeight-innerHeight;
-  if(on&&started&&!window.__building){acc+=dt*42;const px=Math.floor(acc);if(px>=1){acc-=px;window.scrollTo({top:Math.min(max,scrollY+px),behavior:'instant'})}
+  if(on&&started){acc+=dt*75;const px=Math.floor(acc);if(px>=1){acc-=px;window.scrollTo({top:Math.min(max,scrollY+px),behavior:'instant'})}
    if(scrollY>=max-1)set(false)}
   requestAnimationFrame(tick)})(last);
 })();
 /* Live build: coloured agents assemble each section as it comes into view, then gather around your cursor */
 if(buildMode)(()=>{
  document.body.classList.add('bmode');
- const agents=[['Python','#3B82F6'],['SQL','#10B981'],['Power BI','#EAB308'],['Tableau','#EC4899'],['R','#8B5CF6'],['ETL','#06B6D4'],['GMP','#EF4444'],['DAX','#F97316']];
+ const agents=[['Python','#3B82F6','python'],['SQL','#10B981','sql'],['Power BI','#EAB308','powerbi'],['Tableau','#EC4899','tableau'],['R','#8B5CF6','r'],['ETL','#06B6D4','etl'],['GMP','#EF4444','gmp'],['DAX','#F97316','dax']];
  const layer=$('#cursors');
  // pick the pieces of each section that get "built"
  const groups=new Map();
@@ -482,9 +596,9 @@ if(buildMode)(()=>{
  addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;moved=true},{passive:true});
  const ease=t=>1-Math.pow(1-t,3);
  const reveal=el=>{el.classList.add('bing','in');el.style.clipPath='none'};
- const A=agents.map(([n,c],i)=>{
+ const A=agents.map(([n,c,lk],i)=>{
   const d=document.createElement('div');d.className='cur';
-  d.innerHTML=`<svg viewBox="0 0 16 16"><path d="M1 1 L14 7 L8 8.5 L6 14 Z" fill="${c}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="cap"><i style="background:${c}">${n}</i><em>℞</em></span>`;
+  d.innerHTML=`<svg viewBox="0 0 16 16"><path d="M1 1 L14 7 L8 8.5 L6 14 Z" fill="${c}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="cap"><i style="background:${c}">${n}</i><em>${LOGO[lk]}</em></span>`;
   layer.appendChild(d);
   const b=document.createElement('div');b.className='abox';b.style.borderColor=c;b.innerHTML=`<span style="background:${c}"></span>`;document.body.appendChild(b);
   const edge=i%4;const x=edge===0?-40:edge===1?innerWidth+40:Math.random()*innerWidth,y=edge===2?-40:edge===3?innerHeight+40:Math.random()*innerHeight;
