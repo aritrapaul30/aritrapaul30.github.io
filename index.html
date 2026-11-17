@@ -304,7 +304,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .qacheck span:nth-child(2)::before{transition-delay:.35s}.qacheck span:nth-child(3)::before{transition-delay:.7s}.qacheck span:nth-child(4)::before{transition-delay:1.05s}
 .qacheck b{font-family:var(--display);font-weight:400;color:var(--red);font-size:1.1rem;letter-spacing:.02em}
 /* SQL terminal */
-.t-sql{grid-column:span 2}
+.t-sql{grid-column:1/-1}
 .term{border:1px solid var(--line);border-radius:8px;background:#070707;overflow:hidden}
 .bar3{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line)}
 .bar3 i{width:9px;height:9px;border-radius:50%;background:#2A2A2A}.bar3 i:first-child{background:var(--red)}
@@ -682,7 +682,7 @@ addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){$('.hero .word'
 
 /* typing SQL terminal */
 (()=>{const pre=$('#sqlpre');if(!pre)return;
- const lines=[['c','-- branches over the 90% loan-to-deposit ceiling'],['k','WITH '],['','ldr '],['k','AS'],['',' (\n  '],['k','SELECT'],['',' branch_id,\n         '],['k','SUM'],['','(loan_amount) / '],['k','SUM'],['','(deposit_amount) '],['k','AS'],['',' ratio\n  '],['k','FROM'],['',' loans '],['k','JOIN'],['',' deposits '],['k','USING'],['',' (branch_id)\n  '],['k','GROUP BY'],['',' branch_id\n)\n'],['k','SELECT'],['',' branch_id, '],['k','ROUND'],['','(ratio, '],['n','2'],['',') '],['k','AS'],['',' ldr\n'],['k','FROM'],['',' ldr '],['k','WHERE'],['',' ratio > '],['n','0.90'],['',';\n'],['o','\n→ every active branch returned']];
+ const lines=[['c','-- branches over the 90% loan-to-deposit ceiling\n'],['k','WITH '],['','ldr '],['k','AS'],['',' (\n  '],['k','SELECT'],['',' branch_id,\n         '],['k','SUM'],['','(loan_amount) / '],['k','SUM'],['','(deposit_amount) '],['k','AS'],['',' ratio\n  '],['k','FROM'],['',' loans '],['k','JOIN'],['',' deposits '],['k','USING'],['',' (branch_id)\n  '],['k','GROUP BY'],['',' branch_id\n)\n'],['k','SELECT'],['',' branch_id, '],['k','ROUND'],['','(ratio, '],['n','2'],['',') '],['k','AS'],['',' ldr\n'],['k','FROM'],['',' ldr '],['k','WHERE'],['',' ratio > '],['n','0.90'],['',';\n'],['o','\n→ every active branch returned']];
  let started=false;
  const go=()=>{if(started)return;started=true;let li=0,ci=0;const out=[];
   const tick=()=>{if(li>=lines.length){pre.innerHTML=out.join('')+'<span class="cur2"></span>';return}
