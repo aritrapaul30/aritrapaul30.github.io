@@ -303,16 +303,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .in .qacheck span::before{background:var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.2 2.2 4.8-5' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat}
 .qacheck span:nth-child(2)::before{transition-delay:.35s}.qacheck span:nth-child(3)::before{transition-delay:.7s}.qacheck span:nth-child(4)::before{transition-delay:1.05s}
 .qacheck b{font-family:var(--display);font-weight:400;color:var(--red);font-size:1.1rem;letter-spacing:.02em}
-/* SQL terminal */
-.t-sql{grid-column:1/-1}
-.term{border:1px solid var(--line);border-radius:8px;background:#070707;overflow:hidden}
-.bar3{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line)}
-.bar3 i{width:9px;height:9px;border-radius:50%;background:#2A2A2A}.bar3 i:first-child{background:var(--red)}
-.bar3 span{margin-left:8px;font-family:var(--mono);font-size:.62rem;color:var(--muted)}
-#sqlpre{font-family:var(--mono);font-size:.74rem;line-height:1.65;color:#D8D8D8;padding:14px 16px;min-height:230px;white-space:pre-wrap}
-#sqlpre .k{color:#FF6A5E}#sqlpre .c{color:#6B6B6B}#sqlpre .n{color:#F2C811}#sqlpre .o{color:#7EE787}
-#sqlpre .cur2{display:inline-block;width:7px;height:14px;background:var(--red);vertical-align:-2px;animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
+
 /* multiplayer cursors + selection box */
 #cursors{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
 .cur{position:absolute;left:0;top:0;will-change:transform;display:flex;align-items:flex-start;gap:2px}
@@ -511,9 +502,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       <div class="tile t-tools rv"><span class="tl">Tools & AI</span><h4>Everyday kit</h4>
         <div class="toolrow"><span><i class="lg" data-logo="github"></i>GitHub</span><span><i class="lg" data-logo="gradio"></i>Gradio</span><span><i class="lg" data-logo="knime"></i>KNIME</span><span><i class="lg" data-logo="weka"></i>WEKA</span><span><i class="lg" data-logo="apify"></i>Apify</span><span><i class="lg" data-logo="gemini"></i>Gemini</span><span><i class="lg" data-logo="claude"></i>Claude</span></div>
       </div>
-      <div class="tile t-sql rv"><span class="tl">From the banking project</span><h4>A query, simplified</h4>
-        <div class="term"><div class="bar3"><i></i><i></i><i></i><span>banking_analytics.sql</span></div><pre id="sqlpre"></pre></div>
-      </div>
       <div class="tile t-spoken rv"><span class="tl">Languages spoken</span><h4>Communication</h4>
         <div class="spk"><div><b>English</b><span>Professional</span></div><div><b>Bengali</b><span>Native</span></div><div><b>Hindi</b><span>Fluent</span></div></div>
       </div>
@@ -680,18 +668,6 @@ addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){$('.hero .word'
   requestAnimationFrame(tick)})(last);
 })();
 
-/* typing SQL terminal */
-(()=>{const pre=$('#sqlpre');if(!pre)return;
- const lines=[['c','-- branches over the 90% loan-to-deposit ceiling\n'],['k','WITH '],['','ldr '],['k','AS'],['',' (\n  '],['k','SELECT'],['',' branch_id,\n         '],['k','SUM'],['','(loan_amount) / '],['k','SUM'],['','(deposit_amount) '],['k','AS'],['',' ratio\n  '],['k','FROM'],['',' loans '],['k','JOIN'],['',' deposits '],['k','USING'],['',' (branch_id)\n  '],['k','GROUP BY'],['',' branch_id\n)\n'],['k','SELECT'],['',' branch_id, '],['k','ROUND'],['','(ratio, '],['n','2'],['',') '],['k','AS'],['',' ldr\n'],['k','FROM'],['',' ldr '],['k','WHERE'],['',' ratio > '],['n','0.90'],['',';\n'],['o','\n→ every active branch returned']];
- let started=false;
- const go=()=>{if(started)return;started=true;let li=0,ci=0;const out=[];
-  const tick=()=>{if(li>=lines.length){pre.innerHTML=out.join('')+'<span class="cur2"></span>';return}
-   const [c,t]=lines[li];ci++;const part=t.slice(0,ci);const esc=part.replace(/&/g,'&amp;').replace(/</g,'&lt;');
-   pre.innerHTML=out.join('')+(c?`<span class="${c}">${esc}</span>`:esc)+'<span class="cur2"></span>';
-   if(ci>=t.length){out.push(c?`<span class="${c}">${t.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</span>`:t.replace(/&/g,'&amp;').replace(/</g,'&lt;'));li++;ci=0}
-   setTimeout(tick,t[ci-1]==='\n'?120:24)};tick()};
- const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){const w=()=>{const tile=pre.closest('.tile');if(!document.body.classList.contains('bmode')||tile.dataset.done||pre.closest('[data-done]'))go();else setTimeout(w,300)};w();io.disconnect()}},{threshold:.4});io.observe(pre);
-})();
 /* Live build: coloured agents assemble the page piece by piece as it scrolls into view. Only when every piece is built do they gather around your cursor. */
 if(buildMode)(()=>{
  document.body.classList.add('bmode');
@@ -753,7 +729,7 @@ if(buildMode)(()=>{
    if(a.state==='hold'){a.hold-=dt;tx=a.x;ty=a.y;const r=a.task.getBoundingClientRect();Object.assign(a.box.style,{left:r.left-4+'px',top:r.top-4+'px'});
     if(a.hold<=0){a.box.style.opacity=0;a.task=null;a.state='idle'}}
    if(a.state==='wait'){ // no job: rest on the dock in the empty margin on the right
-    const cx=innerWidth-66,cy=innerHeight*.52,ang=a.ang+spin*.35;tx=cx+Math.cos(ang)*18-6;ty=cy+Math.sin(ang)*62-6;stiff=.07}
+    const cx=innerWidth-150,cy=innerHeight*.52,ang=a.ang+spin*.35;tx=cx+Math.cos(ang)*52-6;ty=cy+Math.sin(ang)*52-6;stiff=.07}
    if(a.state==='orbit'){const R=62+6*Math.sin(spin*1.7+i);const ang=a.ang+spin;tx=mx+Math.cos(ang)*R-4;ty=my+Math.sin(ang)*R-4;stiff=moved?.09:.05}
    if(a.state!=='drag'){a.x+=(tx-a.x)*stiff;a.y+=(ty-a.y)*stiff}
    a.el.classList.toggle('docked',a.state==='wait');a.el.style.transform=`translate(${a.x}px,${a.y}px)`;
