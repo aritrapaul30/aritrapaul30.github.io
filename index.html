@@ -285,8 +285,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 #autoscroll{position:fixed;right:20px;bottom:20px;z-index:61;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:rgba(18,18,18,.75);border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 #autoscroll i{width:7px;height:7px;border-radius:50%;background:var(--red)}
 #autoscroll.off i{background:var(--dim)}
-.abox{position:fixed;z-index:39;pointer-events:none;border:1.5px solid;opacity:0;transition:opacity .35s}
-.abox span{position:absolute;left:-1.5px;top:-21px;color:#fff;font-family:var(--mono);font-size:.6rem;padding:3px 6px;border-radius:3px 3px 3px 0;white-space:nowrap}
+.abox{position:fixed;z-index:39;pointer-events:none;border:1px solid;opacity:0;transition:opacity .35s}
+.abox span{display:none;position:absolute;left:-1.5px;top:-21px;color:#fff;font-family:var(--mono);font-size:.6rem;padding:3px 6px;border-radius:3px 3px 3px 0;white-space:nowrap}
 .rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
 .mask{display:block;overflow:hidden}
@@ -660,11 +660,9 @@ if(buildMode)(()=>{
   const done=built>=total;
   A.forEach((a,i)=>{
    if(a.state==='idle'||a.state==='wait'||a.state==='orbit'){
-    if(queue.length&&cool<=0){a.task=queue.shift();a.review=false;a.state='travel';cool=.16}
-    else if(!done){ // nothing new on screen yet: review something already built so every agent keeps working
-     const busy=new Set(A.map(o=>o.task));
-     const pool=items.filter(el=>el.dataset.done&&!busy.has(el)&&(()=>{const r=el.getBoundingClientRect();return r.top>60&&r.bottom<innerHeight-20&&r.width>60&&r.height>20})());
-     if(pool.length){a.task=pool[(Math.random()*pool.length)|0];a.review=true;a.state='travel'}else a.state='wait'}
+    const working=A.filter(o=>o.state==='travel'||o.state==='drag'||o.state==='hold').length;
+    if(queue.length&&cool<=0&&working<5){a.task=queue.shift();a.review=false;a.state='travel';cool=.22}
+    else if(!done){if(a.state!=='wait'){a.state='wait';a.ax=Math.min(innerWidth-160,Math.max(40,a.x));a.ay=Math.min(innerHeight-70,Math.max(90,a.y))}}
     else a.state='orbit'}
    let tx,ty,stiff=.12;
    if(a.state==='travel'){const r=a.task.getBoundingClientRect();
@@ -675,13 +673,13 @@ if(buildMode)(()=>{
     if(!a.review){if(a.task.classList.contains('big')||a.task.classList.contains('pulse'))a.task.classList.add('in');
     a.task.style.clipPath=`inset(0 ${(1-e)*100}% ${(1-e)*100}% 0)`}
     tx=r.left+r.width*e;ty=Math.min(innerHeight-20,r.top+r.height*e);a.x=tx;a.y=ty;
-    Object.assign(a.box.style,{left:r.left-4+'px',top:r.top-4+'px',width:r.width*e+8+'px',height:r.height*e+8+'px',opacity:1});
-    a.box.firstChild.textContent=a.review?`${a.n} · reviewing`:`${a.n} · ${Math.round(r.width*e)} × ${Math.round(r.height*e)}`;
+    Object.assign(a.box.style,{left:r.left-4+'px',top:r.top-4+'px',width:r.width*e+8+'px',height:r.height*e+8+'px',opacity:.75});
+    
     if(a.t>=1){if(!a.review)reveal(a.task);a.state='hold';a.hold=a.review?.4:.22}}
    if(a.state==='hold'){a.hold-=dt;tx=a.x;ty=a.y;const r=a.task.getBoundingClientRect();Object.assign(a.box.style,{left:r.left-4+'px',top:r.top-4+'px'});
     if(a.hold<=0){a.box.style.opacity=0;a.task=null;a.state='idle'}}
-   if(a.state==='wait'){ // stand by at the bottom edge, where the next pieces will appear
-    tx=innerWidth*(.12+.76*i/(A.length-1))+Math.sin(spin*1.3+i)*14;ty=innerHeight-70+Math.cos(spin*1.6+i*2)*10;stiff=.06}
+   if(a.state==='wait'){ // no job right now: drift gently around where it last worked
+    tx=a.ax+Math.sin(spin*.45+i*1.3)*26;ty=a.ay+Math.cos(spin*.37+i*2.1)*16;stiff=.025}
    if(a.state==='orbit'){const R=62+6*Math.sin(spin*1.7+i);const ang=a.ang+spin;tx=mx+Math.cos(ang)*R-4;ty=my+Math.sin(ang)*R-4;stiff=moved?.09:.05}
    if(a.state!=='drag'){a.x+=(tx-a.x)*stiff;a.y+=(ty-a.y)*stiff}
    a.el.style.transform=`translate(${a.x}px,${a.y}px)`;
