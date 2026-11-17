@@ -98,9 +98,9 @@ nav a.l:hover,nav a.l.on{color:var(--ink);background:rgba(255,255,255,.06)}
 /* experience */
 .track{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px}
 .track h2{font-size:clamp(3.4rem,7.5vw,6.6rem);margin-top:12px}
-.track .huge{font-family:var(--display);font-size:clamp(7rem,16vw,13rem);color:var(--red);line-height:.85;margin-top:24px}
+.track .huge{font-family:var(--display);font-size:clamp(7rem,16vw,13rem);color:var(--red);line-height:1;margin-top:30px}
 .track .huge i{font-style:normal;color:var(--ink);font-size:.3em}
-.track .cap{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.track .cap{margin-top:14px;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
 .rows{border-top:1px solid var(--line)}
 .row{display:grid;grid-template-columns:1fr auto;gap:20px;padding:24px 0;border-bottom:1px solid var(--line)}
 .row h4{font-size:1.1rem;font-weight:700}
@@ -189,6 +189,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 .bmode .bp{opacity:0}
 .bmode .bp.bing{opacity:1}
+#autoscroll{position:fixed;right:20px;bottom:20px;z-index:61;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:rgba(18,18,18,.75);border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#autoscroll i{width:7px;height:7px;border-radius:50%;background:var(--red)}
+#autoscroll.off i{background:var(--dim)}
 .abox{position:fixed;z-index:39;pointer-events:none;border:1.5px solid;opacity:0;transition:opacity .35s}
 .abox span{position:absolute;left:-1.5px;top:-21px;color:#fff;font-family:var(--mono);font-size:.6rem;padding:3px 6px;border-radius:3px 3px 3px 0;white-space:nowrap}
 .rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
@@ -227,6 +230,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <a class="l keep" href="#top">Home</a><a class="l" href="#work">Work</a><a class="l" href="#experience">Experience</a><a class="l" href="#about">About</a><a class="l keep" href="#contact">Contact</a>
 </nav>
 <div id="cursors"></div>
+<button id="autoscroll" type="button"><i></i><span>Auto-scroll on</span></button>
 
 <main id="top">
 <!-- HERO -->
@@ -438,6 +442,24 @@ addEventListener('scroll',()=>{let cur='top';document.querySelectorAll('section[
 addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){$('.hero .word').style.transform=`translateX(-50%) translateY(${y*.25}px)`;$('.hero .me').style.translate=`0 ${y*.08}px`}},{passive:true});
 
 
+
+/* Slow auto-scroll: starts once the hero is built, waits while a section is being built, stops for good as soon as the visitor scrolls themselves */
+(()=>{const btn=$('#autoscroll');
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){btn.remove();return}
+ let on=true,acc=0,last=performance.now(),started=false,ownScroll=false;
+ const set=v=>{on=v;btn.classList.toggle('off',!v);btn.querySelector('span').textContent=v?'Auto-scroll on':'Auto-scroll off'};
+ btn.addEventListener('click',()=>set(!on));
+ const stop=()=>{if(on)set(false)};
+ addEventListener('wheel',stop,{passive:true});addEventListener('touchstart',stop,{passive:true});
+ addEventListener('keydown',e=>{if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key))stop()});
+ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',stop));
+ setTimeout(()=>started=true,2500);
+ (function tick(now){const dt=Math.min(.05,(now-last)/1000);last=now;
+  const max=document.documentElement.scrollHeight-innerHeight;
+  if(on&&started&&!window.__building){acc+=dt*42;const px=Math.floor(acc);if(px>=1){acc-=px;window.scrollTo({top:Math.min(max,scrollY+px),behavior:'instant'})}
+   if(scrollY>=max-1)set(false)}
+  requestAnimationFrame(tick)})(last);
+})();
 /* Live build: coloured agents assemble each section as it comes into view, then gather around your cursor */
 if(buildMode)(()=>{
  document.body.classList.add('bmode');
@@ -489,8 +511,9 @@ if(buildMode)(()=>{
    if(a.state!=='drag'){a.x+=(tx-a.x)*stiff;a.y+=(ty-a.y)*stiff}
    a.el.style.transform=`translate(${a.x}px,${a.y}px)`;
   });
+  window.__building=queue.length>0||A.some(a=>a.state==='travel'||a.state==='drag'||a.state==='hold');
   requestAnimationFrame(step)}
- enqueue(hero);requestAnimationFrame(step);
+ window.__building=true;enqueue(hero);requestAnimationFrame(step);
 })();
 </script>
 
