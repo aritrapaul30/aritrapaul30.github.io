@@ -668,7 +668,7 @@ addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){$('.hero .word'
   requestAnimationFrame(tick)})(last);
 })();
 
-/* Live build: coloured agents assemble the page piece by piece as it scrolls into view. Only when every piece is built do they gather around your cursor. */
+/* Live build: coloured agents assemble the page piece by piece as it scrolls into view. Between jobs, and once everything is built, they rest on a dock on the right. */
 if(buildMode)(()=>{
  document.body.classList.add('bmode');
  const agents=[['Python','#3B82F6','python'],['SQL','#10B981','sql'],['Power BI','#EAB308','powerbi'],['Tableau','#EC4899','tableau'],['R','#8B5CF6','r'],['ETL','#06B6D4','etl'],['GMP','#EF4444','gmp'],['DAX','#F97316','dax']];
@@ -713,7 +713,7 @@ if(buildMode)(()=>{
     // take the first unbuilt piece that is on screen right now, wherever the visitor is
     let pick=-1;if(cool<=0&&working<cap)pick=queue.findIndex(el=>{const r=el.getBoundingClientRect();return r.top<innerHeight-12&&r.bottom>50&&r.width>0});
     if(pick>=0){a.task=queue.splice(pick,1)[0];a.review=false;a.state='travel';cool=manual?.05:.22}
-    else a.state=done?'orbit':'wait'}
+    else a.state='wait'}
    let tx,ty,stiff=.12;
    if(a.state==='travel'){const r=a.task.getBoundingClientRect();
     if(r.bottom<0||r.top>innerHeight||r.width===0){if(!a.task.dataset.done){a.task.style.clipPath='inset(0 100% 100% 0)';push(a.task)}a.state='idle';a.task=null;return}
