@@ -426,7 +426,7 @@ $('#mods').innerHTML=mods.map(m=>`<div>${m[0]}<small>${m[1]}</small></div>`).joi
 $('#certlist').innerHTML=certs.map(c=>`<div class="rv"><h4>${c[0]}<b>${String(c[1]).padStart(2,'0')}</b></h4><ul>${c[2].map(x=>`<li>${x[0]}<small>${x[1]}</small></li>`).join('')}</ul></div>`).join('');
 
 const reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const buildMode=!reduceM&&matchMedia('(hover:hover) and (pointer:fine)').matches&&innerWidth>=900;
+const buildMode=!reduceM&&matchMedia('(hover:hover) and (pointer:fine)').matches&&innerWidth>=760;
 if(!buildMode){
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
  document.querySelectorAll('.rv,.big,.pulse').forEach(el=>io.observe(el));
