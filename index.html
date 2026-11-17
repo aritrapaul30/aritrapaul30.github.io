@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aritra Paul | Data Analyst · Business Analyst · Data Engineer</title>
+<meta name="description" content="Aritra Paul, data analyst and registered pharmacist. Master of Business Analytics (CGPA 3.94/4.0), Sunway University. Python, R, SQL, machine learning, Power BI, Tableau.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0A0A;--bg2:#121212;--ink:#F4F4F2;--muted:#8C8C8C;--dim:#5A5A5A;--line:rgba(255,255,255,.09);--red:#E5322A;--red2:#FF4A3D;--deep:#7A120C;
+--display:'Anton',Impact,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+::selection{background:var(--red);color:#fff}
+.wrap{width:min(1240px,92vw);margin:0 auto;position:relative}
+section{position:relative;padding:120px 0;border-top:1px solid var(--line)}
+.lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+.big{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.92;letter-spacing:.005em}
+.big .r{color:var(--red)}
+.big .dot{color:var(--red)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:600;font-size:.86rem;padding:13px 22px;border-radius:4px;transition:.25s;cursor:pointer;border:0}
+.btn.red{background:var(--red);color:#fff}
+.btn.red:hover{background:var(--red2);transform:translateY(-2px)}
+.btn.line{border:1px solid var(--line);color:var(--ink)}
+.btn.line:hover{border-color:var(--ink)}
+.btn svg{width:15px;height:15px}
+
+/* nav */
+nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:4px;padding:6px 8px;border-radius:999px;background:rgba(18,18,18,.7);border:1px solid var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+nav .mk{width:26px;height:26px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-family:var(--display);font-size:.72rem;margin-right:6px}
+nav a.l{font-size:.78rem;color:var(--muted);padding:6px 12px;border-radius:999px;transition:.2s}
+nav a.l:hover,nav a.l.on{color:var(--ink);background:rgba(255,255,255,.06)}
+
+/* hero */
+.hero{min-height:100vh;border:0;padding:0;overflow:hidden;display:flex;align-items:flex-end}
+.hero .glow{position:absolute;inset:0;background:radial-gradient(55% 60% at 62% 40%,rgba(229,50,42,.38),transparent 70%),radial-gradient(40% 40% at 62% 95%,rgba(122,18,12,.5),transparent 70%)}
+.hero .word{position:absolute;left:50%;top:9vh;transform:translateX(-50%);font-family:var(--display);font-size:min(23vw,330px);line-height:.8;letter-spacing:-.01em;white-space:nowrap;
+  background:linear-gradient(180deg,#FF4A3D 0%,#E5322A 45%,rgba(122,18,12,.15) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none}
+.hero .me{position:absolute;left:58%;bottom:0;transform:translateX(-50%);height:88vh;max-height:900px;z-index:2;filter:drop-shadow(0 0 40px rgba(229,50,42,.25))}
+.hero .me img{height:100%;width:auto}
+.hero .left{position:relative;z-index:3;padding-bottom:9vh;max-width:430px}
+.hero .hi{font-family:var(--display);font-size:1.6rem;margin-bottom:6px}
+.hero h1{font-size:clamp(4rem,8.6vw,8.2rem)}
+.hero .role{font-family:var(--display);color:var(--red);font-size:clamp(1.4rem,2.4vw,2.1rem);line-height:1;margin:16px 0 18px;text-transform:uppercase}
+.hero p{color:#BDBDBD;font-size:.95rem;max-width:360px;margin-bottom:24px}
+.hero .cta{display:flex;gap:10px;flex-wrap:wrap}
+.hero .side{position:absolute;right:0;bottom:9vh;z-index:3;display:grid;gap:22px;text-align:right}
+.hero .side b{font-family:var(--display);font-size:2.6rem;color:var(--red);line-height:1;display:block}
+.hero .side span{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;line-height:1.5;display:block}
+.hero .scroll{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--muted)}
+
+/* pharma to data line */
+.pulse{display:block;width:100%;height:90px}
+.pulse path{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.pulse .a{stroke:var(--red);stroke-dasharray:1600;stroke-dashoffset:1600}
+.in .pulse .a,.pulse.in .a{animation:draw 3.2s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* work */
+.sechead{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end;margin-bottom:60px}
+.sechead h2{font-size:clamp(3.4rem,8vw,7rem);margin-top:12px}
+.sechead p{color:#BDBDBD;font-size:.95rem;max-width:420px}
+.nums{display:flex;gap:44px;margin-top:22px}
+.nums b{font-family:var(--display);font-size:2.6rem;line-height:1;display:block}
+.nums span{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.proj{background:var(--bg);padding:34px 32px;position:relative;transition:background .3s}
+.proj:hover{background:#111}
+.proj .n{font-family:var(--display);color:var(--red);font-size:2.4rem;line-height:1}
+.proj .meta{position:absolute;top:34px;right:32px;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;text-align:right}
+.proj h3{font-family:var(--display);font-weight:400;font-size:2.2rem;text-transform:uppercase;line-height:1;margin:14px 0 8px}
+.proj .one{color:#BDBDBD;font-size:.92rem;margin-bottom:14px}
+.proj ul{list-style:none;display:grid;gap:6px;margin-bottom:18px}
+.proj li{font-size:.86rem;color:#A9A9A9;padding-left:18px;position:relative}
+.proj li::before{content:"–";position:absolute;left:0;color:var(--red)}
+.proj .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.proj .tags{display:flex;gap:6px;flex-wrap:wrap}
+.proj .tags span{font-family:var(--mono);font-size:.64rem;padding:4px 8px;border:1px solid var(--line);border-radius:3px;color:#BDBDBD}
+.proj .go{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--ink);border-bottom:1px solid var(--red);padding-bottom:2px}
+.proj .go:hover{color:var(--red)}
+.proj .kpi{font-family:var(--display);font-size:3rem;line-height:1;margin:6px 0 2px}
+.proj .kpi small{font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:.1em;margin-left:8px;text-transform:uppercase;vertical-align:middle}
+.more{margin-top:1px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-top:0}
+.mini{background:var(--bg);padding:24px;transition:background .3s;display:flex;flex-direction:column;gap:8px}
+.mini:hover{background:#111}
+.mini .n{font-family:var(--mono);font-size:.64rem;color:var(--red);letter-spacing:.12em}
+.mini h4{font-family:var(--display);font-weight:400;font-size:1.35rem;text-transform:uppercase;line-height:1.05}
+.mini b{font-family:var(--display);font-weight:400;font-size:1.8rem;color:var(--red);line-height:1}
+.mini span{font-size:.78rem;color:var(--muted)}
+.mini a{margin-top:auto;font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;color:#BDBDBD}
+.mini a:hover{color:var(--red)}
+
+/* experience */
+.track{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px}
+.track h2{font-size:clamp(3.4rem,7.5vw,6.6rem);margin-top:12px}
+.track .huge{font-family:var(--display);font-size:clamp(7rem,16vw,13rem);color:var(--red);line-height:.85;margin-top:24px}
+.track .huge i{font-style:normal;color:var(--ink);font-size:.3em}
+.track .cap{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:1fr auto;gap:20px;padding:24px 0;border-bottom:1px solid var(--line)}
+.row h4{font-size:1.1rem;font-weight:700}
+.row .co{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin:4px 0 10px}
+.row p{font-size:.88rem;color:#A9A9A9;max-width:520px}
+.row .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.row .chips span{font-family:var(--mono);font-size:.62rem;padding:4px 8px;border:1px solid var(--line);border-radius:3px;color:#BDBDBD}
+.row .yr{font-family:var(--display);font-size:2.2rem;color:var(--red);line-height:1;text-align:right}
+.row .yr small{display:block;font-family:var(--mono);font-size:.6rem;color:var(--muted);letter-spacing:.1em}
+
+/* about */
+.about h2{font-size:clamp(3.4rem,8vw,7rem);margin:12px 0 30px}
+.about .cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:60px}
+.about .cols p{color:#BDBDBD;font-size:.95rem}
+.about .cols p b{color:var(--ink);font-weight:600}
+.grid3{display:grid;grid-template-columns:1.1fr 1fr .8fr;gap:40px;align-items:start}
+.table h5,.how h5{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;color:var(--muted);font-weight:400;text-transform:uppercase;margin-bottom:14px}
+.table .r{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.86rem}
+.table .r span:first-child{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;padding-top:3px}
+.table .r span:last-child{color:#D8D8D8}
+.how ol{list-style:none;display:grid;gap:16px}
+.how li{display:grid;grid-template-columns:34px 1fr;gap:10px}
+.how li i{font-style:normal;font-family:var(--display);color:var(--red);font-size:1.3rem;line-height:1.1}
+.how li b{display:block;font-size:.95rem}
+.how li span{font-size:.82rem;color:var(--muted)}
+.quote{background:var(--red);padding:28px;border-radius:4px;transform:rotate(-1.2deg);box-shadow:0 30px 60px -20px rgba(229,50,42,.4)}
+.quote p{font-family:var(--display);font-size:1.9rem;line-height:1;text-transform:uppercase;color:#1A0503}
+.quote small{display:block;margin-top:20px;font-family:var(--mono);font-size:.7rem;color:#3D0906}
+#mol{width:100%;height:340px;display:block;margin-top:30px}
+.molcap{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;text-align:center;margin-top:-6px}
+
+/* education */
+.edu{display:grid;grid-template-columns:1.2fr .8fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:50px}
+.edu>div{background:var(--bg);padding:34px}
+.edu .deg{font-family:var(--display);font-size:2.4rem;text-transform:uppercase;line-height:1}
+.edu .sch{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin:8px 0 18px}
+.edu .score{font-family:var(--display);font-size:4.4rem;color:var(--red);line-height:1}
+.edu .score small{font-family:var(--mono);font-size:.66rem;color:var(--muted);letter-spacing:.1em;margin-left:8px}
+.edu .hon{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;padding:6px 10px;border:1px solid var(--red);color:var(--red2);border-radius:3px;text-transform:uppercase}
+.mods{margin-top:28px;columns:2;column-gap:30px}
+.mods div{break-inside:avoid;display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.9rem;font-weight:600}
+.mods small{font-family:var(--mono);font-weight:400;font-size:.62rem;color:var(--dim);flex:none;padding-top:3px}
+
+/* certifications */
+.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.certs>div{background:var(--bg);padding:28px}
+.certs h4{font-family:var(--display);font-weight:400;font-size:1.5rem;text-transform:uppercase;display:flex;justify-content:space-between}
+.certs h4 b{font-weight:400;color:var(--red)}
+.certs ul{list-style:none;margin-top:14px;display:grid;gap:8px}
+.certs li{font-size:.84rem;color:#BDBDBD;display:grid;grid-template-columns:1fr auto;gap:10px}
+.certs li small{font-family:var(--mono);font-size:.6rem;color:var(--dim);padding-top:3px}
+.pubrow{margin-top:24px;display:flex;gap:16px;align-items:center;padding:22px 28px;border:1px solid var(--line)}
+.pubrow .lbl{flex:none}
+.pubrow b{font-weight:600}
+
+/* contact */
+.contact{padding:140px 0 100px}
+.contact .g{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:end}
+.contact h2{font-size:clamp(4rem,10vw,9rem);margin-top:12px}
+.contact .info{display:grid;gap:14px;margin-top:34px}
+.contact .info a,.contact .info div{display:grid;grid-template-columns:110px 1fr;gap:14px;font-size:.95rem;align-items:center}
+.contact .info span{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.contact .info a:hover b{color:var(--red)}
+.contact .ship{font-family:var(--display);font-size:clamp(2.6rem,5vw,4.4rem);text-transform:uppercase;line-height:.95;text-align:right}
+footer{border-top:1px solid var(--line);padding:22px 0;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* multiplayer cursors + selection box */
+#cursors{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
+.cur{position:absolute;left:0;top:0;will-change:transform;display:flex;align-items:flex-start;gap:2px}
+.cur svg{width:16px;height:16px;flex:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.cur .cap{margin-top:12px;display:flex;border-radius:999px;overflow:hidden;font-family:var(--body);font-size:.66rem;font-weight:600;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.cur .cap i{font-style:normal;padding:5px 7px 5px 9px;color:#fff}
+.cur .cap em{font-style:normal;padding:5px 9px 5px 6px;background:#F4F4F2;color:#1a1a1a}
+#sel{position:fixed;z-index:39;pointer-events:none;border:1.5px solid #3B82F6;opacity:0;transition:all .7s cubic-bezier(.2,.8,.2,1),opacity .4s}
+#sel i{position:absolute;width:7px;height:7px;background:#fff;border:1.5px solid #3B82F6}
+#sel i:nth-child(1){left:-4px;top:-4px}#sel i:nth-child(2){right:-4px;top:-4px}#sel i:nth-child(3){left:-4px;bottom:-4px}#sel i:nth-child(4){right:-4px;bottom:-4px}
+#sel span{position:absolute;left:-1.5px;top:-22px;background:#3B82F6;color:#fff;font-family:var(--mono);font-size:.6rem;padding:3px 6px;border-radius:3px 3px 3px 0;white-space:nowrap}
+#sel b{position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);background:#3B82F6;color:#fff;font-family:var(--mono);font-size:.58rem;font-weight:400;padding:2px 6px;border-radius:3px;white-space:nowrap}
+
+/* floating molecules */
+.molbg{position:absolute;pointer-events:none;opacity:.5}
+.molbg path,.molbg line,.molbg circle{stroke:rgba(255,255,255,.18);stroke-width:1.4;fill:none}
+.molbg .o{fill:var(--red);stroke:none}
+.molbg .draw{stroke-dasharray:420;stroke-dashoffset:420;animation:draw 4s ease forwards}
+
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.mask{display:block;overflow:hidden}
+.mask>span{display:block;transform:translateY(105%);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.in .mask>span,.mask.in>span{transform:none}
+.mask:nth-child(2)>span{transition-delay:.1s}
+.mask:nth-child(3)>span{transition-delay:.2s}
+
+@media (max-width:1000px){
+  .sechead,.track,.about .cols,.grid3,.edu,.contact .g{grid-template-columns:1fr}
+  .projects{grid-template-columns:1fr}.more{grid-template-columns:1fr 1fr}.certs{grid-template-columns:1fr}
+  .hero{align-items:flex-end}
+  .hero .me{left:auto;right:-6vw;transform:none;height:70vh;opacity:.55}
+  .hero .word{top:12vh}
+  .hero .side{display:none}
+  .contact .ship{text-align:left}
+  nav a.l:not(.keep){display:none}
+}
+@media (max-width:600px){
+  section{padding:84px 0}
+  .proj{padding:26px 22px}.proj .meta{position:static;text-align:left;margin-top:6px}
+  .more{grid-template-columns:1fr}
+  .mods{columns:1}
+  .hero .me{height:62vh;right:-18vw}
+  .hero .left{padding-bottom:7vh}
+  .cur,#sel{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.mask>span{opacity:1;transform:none}#cursors{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <span class="mk">AP</span>
+  <a class="l keep" href="#top">Home</a><a class="l" href="#work">Work</a><a class="l" href="#experience">Experience</a><a class="l" href="#about">About</a><a class="l keep" href="#contact">Contact</a>
+</nav>
+<div id="cursors"></div>
+<div id="sel"><i></i><i></i><i></i><i></i><span>Frame</span><b>0 × 0</b></div>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <div class="glow"></div>
+  <div class="word" aria-hidden="true">PORTFOLIO</div>
+  <div class="me"><img src="aritra-cut.webp" alt="Aritra Paul" width="942" height="1529"></div>
+  <div class="wrap" style="height:100vh;display:flex;align-items:flex-end">
+    <div class="left">
+      <div class="hi rv">Hello, I'm</div>
+      <h1 class="big" data-sel="H1 / Name"><span class="mask"><span>Aritra</span></span><span class="mask"><span>Paul<span class="dot">.</span></span></span></h1>
+      <div class="role rv">Data Analyst, Business<br>Analyst & Data Engineer</div>
+      <p class="rv">I turn messy, multi-source data into dashboards, models and decisions. Master of Business Analytics from Sunway University, registered pharmacist, based in Kolkata.</p>
+      <div class="cta rv"><a class="btn red" href="#work">View work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M9 7h8v8"/></svg></a><a class="btn line" href="#contact">Get in touch</a></div>
+    </div>
+    <div class="side rv">
+      <div><b>3.94</b><span>MsBA CGPA<br>out of 4.0</span></div>
+      <div><b>12</b><span>Analytics<br>projects</span></div>
+      <div><b>'26</b><span>Graduated<br>Sunway Uni</span></div>
+    </div>
+  </div>
+  <div class="scroll">SCROLL ↓</div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <svg class="molbg" style="right:4%;top:60px;width:220px" viewBox="0 0 200 200" aria-hidden="true"><path class="draw" d="M100 40 L152 70 L152 130 L100 160 L48 130 L48 70 Z"/><path class="draw" d="M100 52 L141 76 M141 124 L100 148 M59 124 L59 76"/><line class="draw" x1="100" y1="40" x2="100" y2="8"/><line class="draw" x1="100" y1="160" x2="100" y2="192"/><circle class="o" cx="100" cy="8" r="5"/></svg>
+  <div class="wrap">
+    <div class="sechead">
+      <div><span class="lbl rv">Selected work</span><h2 class="big" data-sel="H2 / Section"><span class="mask"><span>Data that</span></span><span class="mask"><span class="r">decides<span style="color:var(--ink)">.</span></span></span></h2></div>
+      <div class="rv"><p>Academic and self-initiated projects across BI, SQL, NLP and machine learning. Every one starts with a business question and ends with a number someone can act on.</p>
+        <div class="nums"><div><b>12</b><span>Projects</span></div><div><b>06</b><span>Tools in daily use</span></div><div><b>20</b><span>Certifications</span></div></div></div>
+    </div>
+
+    <div class="projects">
+      <article class="proj rv" data-sel="Card / Hospital BI">
+        <div class="n">01</div><div class="meta">Business intelligence<br>May 2026</div>
+        <h3>Hospital BI Framework</h3>
+        <p class="one">Power BI framework showing hospital leaders where capacity is hurting care quality.</p>
+        <div class="kpi">83%<small>high-occupancy hospitals over 18% readmission</small></div>
+        <ul><li>Hybrid ETL/ELT pipeline and galaxy-schema data model</li><li>DAX measures and four interactive dashboards</li><li>Capacity, staffing, finance and readmission risk in one scorecard</li></ul>
+        <div class="foot"><div class="tags"><span>Power BI</span><span>DAX</span><span>CRISP-DM</span></div><span class="go" style="border:0;color:var(--muted)">Team project</span></div>
+      </article>
+      <article class="proj rv" data-sel="Card / Shopee NLP">
+        <div class="n">02</div><div class="meta">NLP & web analytics<br>Jan–Feb 2026</div>
+        <h3>Shopee Malaysia Sentiment</h3>
+        <p class="one">Where does Malaysia's biggest e-commerce app lose its customers?</p>
+        <div class="kpi">90.7%<small>accuracy with DistilBERT</small></div>
+        <ul><li>Scraped 2,793 public reviews with Apify</li><li>Beat the VADER baseline by 13.3 points on Malay-English text</li><li>LDA found 6 themes; SPX logistics and chatbot support led complaints</li></ul>
+        <div class="foot"><div class="tags"><span>Python</span><span>DistilBERT</span><span>LDA</span></div><a class="go" href="https://github.com/aritrapaul30/web-social-media-analytics-Shopee-MY" target="_blank" rel="noopener">CODE ↗</a></div>
+      </article>
+      <article class="proj rv" data-sel="Card / Banking SQL">
+        <div class="n">03</div><div class="meta">SQL & data engineering<br>Mar 2026</div>
+        <h3>Malaysian Banking Analytics</h3>
+        <p class="one">A retail bank database built from scratch, then queried for credit and liquidity risk.</p>
+        <div class="kpi">17<small>delinquent loans flagged</small></div>
+        <ul><li>8-table MySQL schema with 19 indexes and 4 analytical views</li><li>14 business queries using window functions, CTEs and a stored procedure</li><li>Every active branch above Bank Negara's 90% loan-to-deposit ceiling</li></ul>
+        <div class="foot"><div class="tags"><span>MySQL</span><span>CTEs</span><span>Schema design</span></div><a class="go" href="https://github.com/aritrapaul30/malaysian-banking-analytics-sql" target="_blank" rel="noopener">CODE ↗</a></div>
+      </article>
+      <article class="proj rv" data-sel="Card / Heart ML">
+        <div class="n">04</div><div class="meta">Machine learning<br>Apr 2026</div>
+        <h3>Heart Disease ML Benchmark</h3>
+        <p class="one">Six classifiers on 917 clinical records: is it the model or the data that wins?</p>
+        <div class="kpi">0.93<small>ROC-AUC · 86.6% accuracy</small></div>
+        <ul><li>10-fold stratified CV with paired t-tests across all six models</li><li>KNN imputation tested against 5 alternatives for 171 bad readings</li><li>Point-biserial feature selection, all features p &lt; 0.05</li></ul>
+        <div class="foot"><div class="tags"><span>scikit-learn</span><span>Gradient Boosting</span></div><a class="go" href="https://github.com/aritrapaul30/heart-disease-ml-comparison" target="_blank" rel="noopener">CODE ↗</a></div>
+      </article>
+    </div>
+    <div class="more" id="more"></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <svg class="pulse rv" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true"><path class="a" d="M0 60 L200 60 L225 60 L240 20 L258 82 L272 46 L290 60 L470 60 L495 60 L510 20 L528 82 L542 46 L560 60 L700 60 C760 58 800 52 840 46 S920 40 960 32 S1060 22 1100 14 L1200 6"/></svg>
+    <div class="track" style="margin-top:40px">
+      <div>
+        <span class="lbl rv">Track record</span>
+        <h2 class="big" data-sel="H2 / Track record"><span class="mask"><span>Trained in pharma.</span></span><span class="mask"><span class="r">Built on data.</span></span></h2>
+        <div class="huge rv">5<i> yrs</i></div>
+        <div class="cap rv">of hands-on data work before my master's</div>
+      </div>
+      <div class="rows">
+        <div class="row rv" data-sel="Row / Sunway"><div><h4>Master of Business Analytics</h4><div class="co">Sunway University · Malaysia</div><p>CGPA 3.94/4.0 on the Sunway Taught Master Scholarship. Perfect 4.00 GPA across the final three semesters.</p></div><div class="yr">2026<small>SEP 25 – AUG 26</small></div></div>
+        <div class="row rv" data-sel="Row / Digital Den"><div><h4>Data & Inventory Analyst</h4><div class="co">Digital Den · Remote, part-time</div><p>Built an Excel data warehouse from scratch and Pivot dashboards that gave the business its first single source of truth for sales, enabling data-driven restocking.</p><div class="chips"><span>Data warehousing</span><span>Power Query</span><span>Dashboards</span></div></div><div class="yr">2025<small>AUG 20 – AUG 25</small></div></div>
+        <div class="row rv" data-sel="Row / Cradel"><div><h4>Junior Executive, Quality Assurance</h4><div class="co">Cradel Pharmaceuticals · Kolkata</div><p>Managed quality data across 3 manufacturing lines with 100% GMP documentation accuracy. Root-cause analysis on batch deviations and reports for multinational client auditors.</p><div class="chips"><span>P&G Health</span><span>Wallace</span><span>Strassenburg</span><span>CAPA</span><span>BMR/BPR</span></div></div><div class="yr">2025<small>SEP 23 – APR 25</small></div></div>
+        <div class="row rv"><div><h4>Bachelor of Pharmacy</h4><div class="co">The Neotia University · India</div><p>CGPA 9.46/10, First Class with Distinction. Registered Pharmacist with the Pharmacy Council of India.</p></div><div class="yr">2023<small>JUL 19 – JUN 23</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="wrap">
+    <span class="lbl rv">About</span>
+    <h2 class="big" data-sel="H2 / About"><span class="mask"><span>Not just numbers.</span></span><span class="mask"><span class="r">Numbers that decide.</span></span></h2>
+    <div class="cols">
+      <p class="rv">I'm a data analyst with a pharmacist's training. Writing batch deviation reports in quality assurance, I realised the part of the job I enjoyed most was the data underneath it, so I went and did a <b>Master of Business Analytics at Sunway University</b>.</p>
+      <p class="rv">Most days that means <b>Python, SQL and Power BI</b>: cleaning data until it can be trusted, building models that are tested properly, and dashboards people actually open. I bring the habit QA taught me: <b>every number has to be right the first time</b>.</p>
+    </div>
+    <div class="grid3">
+      <div class="table rv">
+        <h5>Skills & tools</h5>
+        <div class="r"><span>Languages</span><span>Python, R, SQL (MySQL)</span></div>
+        <div class="r"><span>Engineering</span><span>ETL/ELT, data warehousing, star & galaxy schemas, window functions, CTEs, stored procedures</span></div>
+        <div class="r"><span>ML</span><span>Random Forest, Gradient Boosting, XGBoost, regression, K-Means, cross-validation, tuning</span></div>
+        <div class="r"><span>BI</span><span>Power BI (DAX), Tableau, Plotly, ggplot2, Excel & Power Query</span></div>
+        <div class="r"><span>NLP</span><span>DistilBERT, VADER, LDA, Naive Bayes</span></div>
+        <div class="r"><span>Tools</span><span>Gradio, KNIME, WEKA, Apify, GitHub, Gemini, Claude</span></div>
+        <div class="r"><span>Domain</span><span>GMP / QMS compliance, pharmaceutical operations, stakeholder reporting</span></div>
+        <div class="r"><span>Languages</span><span>English, Bengali, Hindi</span></div>
+      </div>
+      <div class="how rv">
+        <h5>How I work</h5>
+        <ol>
+          <li><i>01</i><div><b>Question first</b><span>Agree the business decision before touching the data.</span></div></li>
+          <li><i>02</i><div><b>Clean like it's audited</b><span>Validate every row, document every fix.</span></div></li>
+          <li><i>03</i><div><b>Test, don't trust</b><span>Cross-validation and significance tests, not single scores.</span></div></li>
+          <li><i>04</i><div><b>Ship the answer</b><span>One clear dashboard or number someone can act on.</span></div></li>
+        </ol>
+        <canvas id="mol" aria-label="3D model of a paracetamol molecule"></canvas>
+        <div class="molcap">Paracetamol · C₈H₉NO₂ · drag to rotate</div>
+      </div>
+      <div class="rv"><div class="quote" data-sel="Note / Quote"><p>Clean the data. Test the model. Then trust the number.</p><small>Aritra Paul</small></div></div>
+    </div>
+
+    <div class="edu">
+      <div class="rv">
+        <span class="lbl">Master's subjects</span>
+        <div class="deg" style="margin-top:12px">Master of Business Analytics</div>
+        <div class="sch">Sunway University · Sunway Taught Master Scholarship 2025</div>
+        <div class="mods" id="mods"></div>
+      </div>
+      <div class="rv">
+        <span class="lbl">Results</span>
+        <div class="score" style="margin-top:12px">3.94<small>/ 4.0 MSBA</small></div>
+        <span class="hon">Merit scholarship</span>
+        <div class="score" style="margin-top:30px">9.46<small>/ 10 B.PHARM</small></div>
+        <span class="hon">First Class with Distinction</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="wrap">
+    <div class="sechead" style="margin-bottom:40px"><div><span class="lbl rv">Certifications</span><h2 class="big" data-sel="H2 / Certifications"><span class="mask"><span>Always</span></span><span class="mask"><span class="r">learning<span style="color:var(--ink)">.</span></span></span></h2></div><div class="rv nums" style="justify-content:flex-end"><div><b>20</b><span>Certifications</span></div><div><b>01</b><span>Publication</span></div></div></div>
+    <div class="certs" id="certlist"></div>
+    <div class="pubrow rv"><span class="lbl">Publication</span><b>Phytochemical & Pharmacological Review on <i>Catharanthus roseus</i> (Apocynaceae)</b></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap g">
+    <div>
+      <span class="lbl rv">Contact</span>
+      <h2 class="big" data-sel="H2 / Contact"><span class="mask"><span>Let's work</span></span><span class="mask"><span class="r">together<span style="color:var(--ink)">.</span></span></span></h2>
+      <div class="info rv">
+        <a href="mailto:aritrapaul30@gmail.com"><span>Email</span><b>aritrapaul30@gmail.com</b></a>
+        <a href="https://www.linkedin.com/in/aritrapaul30" target="_blank" rel="noopener"><span>LinkedIn</span><b>linkedin.com/in/aritrapaul30</b></a>
+        <a href="https://github.com/aritrapaul30" target="_blank" rel="noopener"><span>GitHub</span><b>github.com/aritrapaul30</b></a>
+        <div><span>Location</span><b>Kolkata, India · open to relocation</b></div>
+      </div>
+      <div class="cta rv" style="margin-top:30px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn red" id="copy">Copy email</button><a class="btn line" href="https://www.linkedin.com/in/aritrapaul30" target="_blank" rel="noopener">Message on LinkedIn</a></div>
+    </div>
+    <div class="ship rv">Available<br><span style="color:var(--red)">immediately.</span></div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"><span>© 2026 Aritra Paul</span><span>Kolkata, India</span></div></footer>
+
+<script>
+const GH='https://github.com/aritrapaul30/';
+const more=[
+ ['05','Shopee Sales, Southeast Asia','2,244','rows validated, all matched','shopee-sales-analytics-southeast-asia'],
+ ['06','E-Commerce BI Dashboard','$737K','revenue across 10,000 orders','ecommerce-bi-dashboard-tableau'],
+ ['07','EV SmartHub AI Suite','7 tabs','Gradio decision dashboard','ev-smarthub-ai-analytics'],
+ ['08','Used Car Pricing','R² 0.88','RF cut RMSE ~13.5%','used-car-market-analysis-R'],
+ ['09','Airbnb NYC Pricing','48,895','listings modelled in R','airbnb-nyc-pricing-analysis-R'],
+ ['10','Real Estate Pricing ML','84.6%','tier accuracy, AUC 0.889','real-estate-pricing-ml'],
+ ['11','Hotel ADR Prediction','R² 0.996','tuned Random Forest','hotel-adr-prediction'],
+ ['12','Indian Flight Fares','R² 0.983','300,153 bookings','indian-flight-fare-prediction']
+];
+const mods=[['Machine Learning for Business Decisions','A+'],['Business Intelligence','A+'],['Data Mining','A+'],['Python for Business Analytics','A+'],['Advanced Business Analytics & Visualisation','A+'],['Web and Social Media Analytics','A+'],['Management and Business Analytics','A+'],['Business Research Methods','A+'],['AI and Decision Making','A'],['Business Statistics Using R','A'],['Capstone Project I','A-'],['Capstone Project II','A+']];
+const certs=[
+ ['Data & BI',9,[['Career Essentials in Data Analysis','Microsoft'],['Power BI Essential Training','LinkedIn'],['Data Visualization for Analysts','LinkedIn'],['Data Analytics for Business Professionals','LinkedIn'],['Learning Data Analytics 1','LinkedIn'],['Learning Data Analytics 2','LinkedIn'],['Career Skills in Data Analytics','LinkedIn'],['Strategic Planning','LinkedIn'],['Data Analytics Job Simulation','Deloitte']]],
+ ['AI',4,[['Claude Code in Action','Anthropic'],['Introduction to Agent Skills','Anthropic'],['Claude 101','Anthropic'],['Gemini Certified Student','Google']]],
+ ['Research & pharma',7,[['Biomedical Data Research','CITI'],['Social & Behavioral Research','CITI'],['IRB Chair','CITI'],['Minimal Risk Research','CITI'],['Registered Pharmacist','PCI'],['Bio-Lab Training','TAAB'],['Pharma Industry Training','EIPW']]]
+];
+const $=s=>document.querySelector(s);
+$('#more').innerHTML=more.map(m=>`<div class="mini rv"><span class="n">${m[0]}</span><h4>${m[1]}</h4><b>${m[2]}</b><span>${m[3]}</span><a href="${GH+m[4]}" target="_blank" rel="noopener">CODE ↗</a></div>`).join('');
+$('#mods').innerHTML=mods.map(m=>`<div>${m[0]}<small>${m[1]}</small></div>`).join('');
+$('#certlist').innerHTML=certs.map(c=>`<div class="rv"><h4>${c[0]}<b>${String(c[1]).padStart(2,'0')}</b></h4><ul>${c[2].map(x=>`<li>${x[0]}<small>${x[1]}</small></li>`).join('')}</ul></div>`).join('');
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv,.big,.pulse').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.hero .rv,.hero .big').forEach(e=>e.classList.add('in')),150);
+$('#copy').addEventListener('click',async e=>{try{await navigator.clipboard.writeText('aritrapaul30@gmail.com');e.target.textContent='Copied'}catch(_){e.target.textContent='aritrapaul30@gmail.com'}});
+const navA=[...document.querySelectorAll('nav a.l')];
+addEventListener('scroll',()=>{let cur='top';document.querySelectorAll('section[id]').forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.4)cur=s.id});navA.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur))},{passive:true});
+addEventListener('scroll',()=>{const y=scrollY;if(y<innerHeight){$('.hero .word').style.transform=`translateX(-50%) translateY(${y*.25}px)`;$('.hero .me').style.translate=`0 ${y*.08}px`}},{passive:true});
+
+/* multiplayer cursors: pill-capsule name tags that wander and gather around whatever is being "edited" */
+(()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const tags=[['Python','#3B82F6'],['SQL','#10B981'],['Power BI','#EAB308'],['Tableau','#EC4899'],['R','#8B5CF6'],['ETL','#06B6D4'],['GMP','#EF4444'],['DAX','#F97316']];
+ const box=$('#cursors');const sel=$('#sel');
+ const cs=tags.map(([n,c],i)=>{const d=document.createElement('div');d.className='cur';d.innerHTML=`<svg viewBox="0 0 16 16"><path d="M1 1 L14 7 L8 8.5 L6 14 Z" fill="${c}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="cap"><i style="background:${c}">${n}</i><em>℞</em></span>`;box.appendChild(d);
+  return{el:d,x:Math.random()*innerWidth,y:Math.random()*innerHeight,tx:0,ty:0,sp:.012+Math.random()*.02,t:0}});
+ cs.forEach(c=>{c.tx=c.x;c.ty=c.y});
+ const pick=c=>{c.tx=60+Math.random()*(innerWidth-160);c.ty=80+Math.random()*(innerHeight-140)};
+ let target=null;
+ function chooseSel(){const els=[...document.querySelectorAll('[data-sel]')].filter(e=>{const r=e.getBoundingClientRect();return r.top>70&&r.bottom<innerHeight-30&&r.width>0});
+  if(!els.length){sel.style.opacity=0;target=null;return}target=els[(Math.random()*els.length)|0];const r=target.getBoundingClientRect();
+  sel.style.left=r.left-6+'px';sel.style.top=r.top-6+'px';sel.style.width=r.width+12+'px';sel.style.height=r.height+12+'px';sel.style.opacity=1;
+  sel.querySelector('span').textContent=target.dataset.sel;sel.querySelector('b').textContent=`${Math.round(r.width)} × ${Math.round(r.height)}`;
+  cs.slice(0,3).forEach((c,i)=>{c.tx=r.left+r.width*(.2+.3*i)+(Math.random()-.5)*40;c.ty=r.top+r.height*(.3+Math.random()*.6)})}
+ setInterval(chooseSel,2600);addEventListener('scroll',()=>{sel.style.opacity=0},{passive:true});
+ (function loop(){cs.forEach((c,i)=>{c.t++;if(c.t%(160+i*23)===0&&(i>2||!target))pick(c);c.x+=(c.tx-c.x)*c.sp;c.y+=(c.ty-c.y)*c.sp;c.el.style.transform=`translate(${c.x}px,${c.y}px)`});requestAnimationFrame(loop)})();
+})();
+</script>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+/* 3D paracetamol molecule (ball and stick) */
+import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const canvas=document.getElementById('mol');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.outputColorSpace=THREE.SRGBColorSpace;
+const scene=new THREE.Scene();scene.environment=new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(renderer),.04).texture;
+const cam=new THREE.PerspectiveCamera(32,1,.1,100);cam.position.set(0,0,17);
+scene.add(new THREE.DirectionalLight(0xffffff,2).translateX(4).translateY(5).translateZ(6));
+const rim=new THREE.DirectionalLight(0xff4a3d,2.5);rim.position.set(-6,-2,-4);scene.add(rim);
+const A=(a,r)=>[Math.cos(a)*r,Math.sin(a)*r];
+const ring=[...Array(6)].map((_,i)=>[...A(Math.PI/2+i*Math.PI/3,1.4),0]);
+const atoms=[...ring.map(p=>['C',p]),['O',[0,2.8,0]],['N',[0,-2.8,0]],['C',[1.21,-3.5,0]],['O',[2.42,-2.8,0]],['C',[1.21,-4.9,0]],
+ ['H',[0.9,3.2,0]],['H',[-1.05,-3.3,0]],['H',[-2.1,1.21,0]],['H',[2.1,1.21,0]],['H',[-2.1,-1.21,0]],['H',[2.1,-1.21,0]],['H',[1.21,-5.7,.75]],['H',[.4,-5.2,-.6]],['H',[2.05,-5.2,-.6]]];
+const bonds=[[0,1,2],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,0,1],[0,6,1],[3,7,1],[7,8,1],[8,9,2],[8,10,1],[6,11,1],[7,12,1],[1,13,1],[5,14,1],[2,15,1],[4,16,1],[10,17,1],[10,18,1],[10,19,1]];
+const mat={C:new THREE.MeshPhysicalMaterial({color:'#2A2A2A',roughness:.3,clearcoat:1}),O:new THREE.MeshPhysicalMaterial({color:'#E5322A',roughness:.25,clearcoat:1}),N:new THREE.MeshPhysicalMaterial({color:'#F4F4F2',roughness:.3,clearcoat:1}),H:new THREE.MeshPhysicalMaterial({color:'#BDBDBD',roughness:.35,clearcoat:.6})};
+const rad={C:.42,O:.46,N:.44,H:.24};const g=new THREE.Group();scene.add(g);
+atoms.forEach(([e,p])=>{const m=new THREE.Mesh(new THREE.SphereGeometry(rad[e],40,28),mat[e]);m.position.set(...p);g.add(m)});
+const bm=new THREE.MeshPhysicalMaterial({color:'#8C8C8C',roughness:.4,metalness:.3});
+bonds.forEach(([a,b,o])=>{const pa=new THREE.Vector3(...atoms[a][1]),pb=new THREE.Vector3(...atoms[b][1]);const d=pb.clone().sub(pa);const len=d.length();
+ const off=new THREE.Vector3(-d.y,d.x,0).normalize().multiplyScalar(.13);
+ (o===2?[off,off.clone().negate()]:[new THREE.Vector3()]).forEach(of=>{const c=new THREE.Mesh(new THREE.CylinderGeometry(.075,.075,len,12),bm);c.position.copy(pa).add(pb).multiplyScalar(.5).add(of);c.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.clone().normalize());g.add(c)})});
+g.position.y=1.05;
+let drag=false,lx=0,ly=0,vy=.006,vx=0;
+canvas.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener('pointermove',e=>{if(!drag)return;vy=(e.clientX-lx)*.004;vx=(e.clientY-ly)*.004;lx=e.clientX;ly=e.clientY});
+canvas.addEventListener('pointerup',()=>drag=false);
+function size(){const r=canvas.getBoundingClientRect();renderer.setSize(r.width,r.height,false);cam.aspect=r.width/r.height;cam.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+let vis=false;new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(canvas);
+(function loop(){requestAnimationFrame(loop);if(!vis)return;g.rotation.y+=vy;g.rotation.x+=vx;if(!drag){vy+=(.006-vy)*.03;vx*=.94}renderer.render(scene,cam)})();
+</script>
+</body>
+</html>
